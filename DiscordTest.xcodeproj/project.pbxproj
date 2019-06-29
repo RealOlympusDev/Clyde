@@ -1,0 +1,552 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A413DA5B22C7225D002F4DD5 /* DiscordTest WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A413DA5A22C7225D002F4DD5 /* DiscordTest WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A413DA6122C7225D002F4DD5 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A413DA5F22C7225D002F4DD5 /* Interface.storyboard */; };
+		A413DA6322C72261002F4DD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A413DA6222C72261002F4DD5 /* Assets.xcassets */; };
+		A413DA6A22C72261002F4DD5 /* DiscordTest WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A413DA6922C72261002F4DD5 /* DiscordTest WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A413DA6F22C72261002F4DD5 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A413DA6E22C72261002F4DD5 /* InterfaceController.swift */; };
+		A413DA7122C72261002F4DD5 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A413DA7022C72261002F4DD5 /* ExtensionDelegate.swift */; };
+		A413DA7322C72261002F4DD5 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A413DA7222C72261002F4DD5 /* NotificationController.swift */; };
+		A413DA7522C72264002F4DD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A413DA7422C72264002F4DD5 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A413DA5C22C7225D002F4DD5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A413DA5022C7225D002F4DD5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A413DA5922C7225D002F4DD5;
+			remoteInfo = "DiscordTest WatchKit App";
+		};
+		A413DA6B22C72261002F4DD5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A413DA5022C7225D002F4DD5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A413DA6822C72261002F4DD5;
+			remoteInfo = "DiscordTest WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A413DA7D22C72264002F4DD5 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A413DA6A22C72261002F4DD5 /* DiscordTest WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A413DA8122C72264002F4DD5 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				A413DA5B22C7225D002F4DD5 /* DiscordTest WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A413DA5622C7225D002F4DD5 /* DiscordTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscordTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A413DA5A22C7225D002F4DD5 /* DiscordTest WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DiscordTest WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A413DA6022C7225D002F4DD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		A413DA6222C72261002F4DD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A413DA6422C72261002F4DD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A413DA6922C72261002F4DD5 /* DiscordTest WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "DiscordTest WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A413DA6E22C72261002F4DD5 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		A413DA7022C72261002F4DD5 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		A413DA7222C72261002F4DD5 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		A413DA7422C72264002F4DD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A413DA7622C72264002F4DD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A413DA7722C72264002F4DD5 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A413DA6622C72261002F4DD5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A413DA4F22C7225D002F4DD5 = {
+			isa = PBXGroup;
+			children = (
+				A413DA5E22C7225D002F4DD5 /* DiscordTest WatchKit App */,
+				A413DA6D22C72261002F4DD5 /* DiscordTest WatchKit Extension */,
+				A413DA5722C7225D002F4DD5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A413DA5722C7225D002F4DD5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A413DA5622C7225D002F4DD5 /* DiscordTest.app */,
+				A413DA5A22C7225D002F4DD5 /* DiscordTest WatchKit App.app */,
+				A413DA6922C72261002F4DD5 /* DiscordTest WatchKit Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A413DA5E22C7225D002F4DD5 /* DiscordTest WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				A413DA5F22C7225D002F4DD5 /* Interface.storyboard */,
+				A413DA6222C72261002F4DD5 /* Assets.xcassets */,
+				A413DA6422C72261002F4DD5 /* Info.plist */,
+			);
+			path = "DiscordTest WatchKit App";
+			sourceTree = "<group>";
+		};
+		A413DA6D22C72261002F4DD5 /* DiscordTest WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A413DA6E22C72261002F4DD5 /* InterfaceController.swift */,
+				A413DA7022C72261002F4DD5 /* ExtensionDelegate.swift */,
+				A413DA7222C72261002F4DD5 /* NotificationController.swift */,
+				A413DA7422C72264002F4DD5 /* Assets.xcassets */,
+				A413DA7622C72264002F4DD5 /* Info.plist */,
+				A413DA7722C72264002F4DD5 /* PushNotificationPayload.apns */,
+			);
+			path = "DiscordTest WatchKit Extension";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A413DA5522C7225D002F4DD5 /* DiscordTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A413DA8222C72264002F4DD5 /* Build configuration list for PBXNativeTarget "DiscordTest" */;
+			buildPhases = (
+				A413DA5422C7225D002F4DD5 /* Resources */,
+				A413DA8122C72264002F4DD5 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A413DA5D22C7225D002F4DD5 /* PBXTargetDependency */,
+			);
+			name = DiscordTest;
+			productName = DiscordTest;
+			productReference = A413DA5622C7225D002F4DD5 /* DiscordTest.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		A413DA5922C7225D002F4DD5 /* DiscordTest WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A413DA7E22C72264002F4DD5 /* Build configuration list for PBXNativeTarget "DiscordTest WatchKit App" */;
+			buildPhases = (
+				A413DA5822C7225D002F4DD5 /* Resources */,
+				A413DA7D22C72264002F4DD5 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A413DA6C22C72261002F4DD5 /* PBXTargetDependency */,
+			);
+			name = "DiscordTest WatchKit App";
+			productName = "DiscordTest WatchKit App";
+			productReference = A413DA5A22C7225D002F4DD5 /* DiscordTest WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		A413DA6822C72261002F4DD5 /* DiscordTest WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A413DA7A22C72264002F4DD5 /* Build configuration list for PBXNativeTarget "DiscordTest WatchKit Extension" */;
+			buildPhases = (
+				A413DA6522C72261002F4DD5 /* Sources */,
+				A413DA6622C72261002F4DD5 /* Frameworks */,
+				A413DA6722C72261002F4DD5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DiscordTest WatchKit Extension";
+			productName = "DiscordTest WatchKit Extension";
+			productReference = A413DA6922C72261002F4DD5 /* DiscordTest WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A413DA5022C7225D002F4DD5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = "Reuben Catchpole";
+				TargetAttributes = {
+					A413DA5522C7225D002F4DD5 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					A413DA5922C7225D002F4DD5 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					A413DA6822C72261002F4DD5 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+				};
+			};
+			buildConfigurationList = A413DA5322C7225D002F4DD5 /* Build configuration list for PBXProject "DiscordTest" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A413DA4F22C7225D002F4DD5;
+			productRefGroup = A413DA5722C7225D002F4DD5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A413DA5522C7225D002F4DD5 /* DiscordTest */,
+				A413DA5922C7225D002F4DD5 /* DiscordTest WatchKit App */,
+				A413DA6822C72261002F4DD5 /* DiscordTest WatchKit Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A413DA5422C7225D002F4DD5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A413DA5822C7225D002F4DD5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A413DA6322C72261002F4DD5 /* Assets.xcassets in Resources */,
+				A413DA6122C7225D002F4DD5 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A413DA6722C72261002F4DD5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A413DA7522C72264002F4DD5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A413DA6522C72261002F4DD5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A413DA7322C72261002F4DD5 /* NotificationController.swift in Sources */,
+				A413DA7122C72261002F4DD5 /* ExtensionDelegate.swift in Sources */,
+				A413DA6F22C72261002F4DD5 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A413DA5D22C7225D002F4DD5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A413DA5922C7225D002F4DD5 /* DiscordTest WatchKit App */;
+			targetProxy = A413DA5C22C7225D002F4DD5 /* PBXContainerItemProxy */;
+		};
+		A413DA6C22C72261002F4DD5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A413DA6822C72261002F4DD5 /* DiscordTest WatchKit Extension */;
+			targetProxy = A413DA6B22C72261002F4DD5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A413DA5F22C7225D002F4DD5 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A413DA6022C7225D002F4DD5 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A413DA7822C72264002F4DD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A413DA7922C72264002F4DD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A413DA7B22C72264002F4DD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72UM5XF97Y;
+				INFOPLIST_FILE = "DiscordTest WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = reuben.DiscordTest.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		A413DA7C22C72264002F4DD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72UM5XF97Y;
+				INFOPLIST_FILE = "DiscordTest WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = reuben.DiscordTest.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		A413DA7F22C72264002F4DD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72UM5XF97Y;
+				IBSC_MODULE = DiscordTest_WatchKit_Extension;
+				INFOPLIST_FILE = "DiscordTest WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = reuben.DiscordTest.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		A413DA8022C72264002F4DD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72UM5XF97Y;
+				IBSC_MODULE = DiscordTest_WatchKit_Extension;
+				INFOPLIST_FILE = "DiscordTest WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = reuben.DiscordTest.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		A413DA8322C72264002F4DD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 72UM5XF97Y;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = reuben.DiscordTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A413DA8422C72264002F4DD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 72UM5XF97Y;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = reuben.DiscordTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A413DA5322C7225D002F4DD5 /* Build configuration list for PBXProject "DiscordTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A413DA7822C72264002F4DD5 /* Debug */,
+				A413DA7922C72264002F4DD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A413DA7A22C72264002F4DD5 /* Build configuration list for PBXNativeTarget "DiscordTest WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A413DA7B22C72264002F4DD5 /* Debug */,
+				A413DA7C22C72264002F4DD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A413DA7E22C72264002F4DD5 /* Build configuration list for PBXNativeTarget "DiscordTest WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A413DA7F22C72264002F4DD5 /* Debug */,
+				A413DA8022C72264002F4DD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A413DA8222C72264002F4DD5 /* Build configuration list for PBXNativeTarget "DiscordTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A413DA8322C72264002F4DD5 /* Debug */,
+				A413DA8422C72264002F4DD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A413DA5022C7225D002F4DD5 /* Project object */;
+}
