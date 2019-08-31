@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14854.2" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KxN-oi-agB">
+    <device id="watch44"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14640.1"/>
+    </dependencies>
+    <scenes>
+        <!--Servers-->
+        <scene sceneID="5S1-Bk-tax">
+            <objects>
+                <controller title="Servers" id="KxN-oi-agB" customClass="InterfaceController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <table alignment="left" id="uny-0b-Gsq">
+                            <items>
+                                <tableRow identifier="ServerRow" id="mAa-a7-CF7" customClass="ServerRowController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" contentMode="scaleAspectFill" id="DE5-RW-JXK">
+                                        <items>
+                                            <group alignment="center" verticalAlignment="center" radius="60" id="gQv-Tb-R0i">
+                                                <items>
+                                                    <imageView width="120" height="120" alignment="center" verticalAlignment="center" image="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" contentMode="scaleAspectFill" id="6LN-by-KdF"/>
+                                                </items>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="10"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="icon" destination="6LN-by-KdF" id="WFN-W2-gya"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="uny-0b-Gsq" id="SqZ-Ym-wEO"/>
+                        <segue destination="0BW-0f-B1k" kind="relationship" relationship="nextPage" id="hob-ua-DNW"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-433" y="360"/>
+        </scene>
+        <!--Channels-->
+        <scene sceneID="TUJ-s5-h2n">
+            <objects>
+                <controller identifier="Channel" title="Channels" id="5YA-v9-Usl" customClass="ChannelController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <table alignment="left" id="YJJ-D6-rs8">
+                            <items>
+                                <tableRow identifier="ChannelRow" id="Qpa-EM-kYa" customClass="ChannelRowController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="GX8-Kj-hKH">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="#test" textAlignment="center" numberOfLines="0" id="wbo-XS-oJf">
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </label>
+                                        </items>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="10"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="channel_text" destination="wbo-XS-oJf" id="6yJ-jE-r3p"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <imageView alignment="center" verticalAlignment="center" image="ai" id="0nc-1t-tlL"/>
+                    </items>
+                    <connections>
+                        <outlet property="ai" destination="0nc-1t-tlL" id="gSU-A7-wgd"/>
+                        <outlet property="table" destination="YJJ-D6-rs8" id="0PD-GZ-YcM"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-19" y="360"/>
+        </scene>
+        <!--Message-->
+        <scene sceneID="jPk-gv-Q4Y">
+            <objects>
+                <controller identifier="Message" title="Message" id="uCB-NO-pex" customClass="MessageController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <table alignment="left" id="xZX-s8-5ND">
+                            <items>
+                                <tableRow identifier="MessageRow" selectable="NO" id="u7x-gX-qfO" customClass="MessageRowController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="zRl-8o-51Z">
+                                        <items>
+                                            <group width="1" alignment="left" id="jSj-89-okr">
+                                                <items>
+                                                    <group alignment="left" id="8eG-4g-dIf">
+                                                        <items>
+                                                            <group alignment="left" radius="14" id="cOU-j9-ZgX">
+                                                                <items>
+                                                                    <imageView width="30" height="30" alignment="left" image="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" id="OAQ-aK-2Au"/>
+                                                                </items>
+                                                            </group>
+                                                        </items>
+                                                        <edgeInsets key="margins" left="0.0" right="5" top="0.0" bottom="0.0"/>
+                                                    </group>
+                                                    <label width="0.69999999999999996" alignment="left" verticalAlignment="center" text="username" id="8ln-0Z-u0L">
+                                                        <fontDescription key="font" type="boldSystem" pointSize="14"/>
+                                                    </label>
+                                                </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="7" bottom="0.0"/>
+                                            </group>
+                                            <group width="1" alignment="left" layout="vertical" id="NNZ-BZ-c98">
+                                                <items>
+                                                    <label alignment="left" text="this is a test message" numberOfLines="0" id="PeQ-sw-ZbW">
+                                                        <fontDescription key="font" type="system" pointSize="16"/>
+                                                    </label>
+                                                    <imageView alignment="left" image="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" contentMode="scaleAspectFill" id="4B3-SP-4VB">
+                                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </imageView>
+                                                </items>
+                                                <edgeInsets key="margins" left="5" right="5" top="5" bottom="5"/>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="image" destination="4B3-SP-4VB" id="2nU-R3-Evo"/>
+                                        <outlet property="profile_pic" destination="OAQ-aK-2Au" id="pbV-oC-16Z"/>
+                                        <outlet property="text" destination="PeQ-sw-ZbW" id="inG-W0-p6b"/>
+                                        <outlet property="username" destination="8ln-0Z-u0L" id="faV-Iw-zzm"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <group width="1" alignment="left" id="9TQ-cV-QBD">
+                            <items>
+                                <textField width="1" alignment="left" verticalAlignment="bottom" placeholder="Message" id="8Lw-9c-pHH">
+                                    <connections>
+                                        <action selector="send_message:" destination="uCB-NO-pex" id="nLN-G7-8zC"/>
+                                    </connections>
+                                </textField>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="20" bottom="0.0"/>
+                        </group>
+                        <imageView alignment="center" verticalAlignment="center" image="ai" id="mTQ-7l-U14"/>
+                    </items>
+                    <connections>
+                        <outlet property="ai" destination="mTQ-7l-U14" id="7R0-Jy-ojc"/>
+                        <outlet property="group" destination="9TQ-cV-QBD" id="l8V-9l-vQl"/>
+                        <outlet property="message" destination="8Lw-9c-pHH" id="72v-Ce-5zR"/>
+                        <outlet property="table" destination="xZX-s8-5ND" id="jhA-ef-wfR"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-433" y="643"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="4Mi-l4-Fyv">
+            <objects>
+                <controller identifier="Login" id="olY-ID-Eug" customClass="LoginController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="left" verticalAlignment="center" layout="vertical" spacing="15" id="b3Q-1e-hf7">
+                            <items>
+                                <label alignment="center" text="Login to Discord" textAlignment="left" numberOfLines="2" id="KmR-b4-3rX">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <group width="1" alignment="left" layout="vertical" id="jpy-Fg-psF">
+                                    <items>
+                                        <textField width="1" alignment="left" placeholder="Email" textContentType="email" id="7j1-Zj-aTe">
+                                            <connections>
+                                                <action selector="email:" destination="olY-ID-Eug" id="h8h-6j-Aal"/>
+                                            </connections>
+                                        </textField>
+                                        <textField width="1" alignment="left" placeholder="Password" textContentType="password" secureTextEntry="YES" id="Bin-4C-XTC">
+                                            <connections>
+                                                <action selector="password:" destination="olY-ID-Eug" id="OsR-rZ-olh"/>
+                                            </connections>
+                                        </textField>
+                                    </items>
+                                </group>
+                                <button width="1" alignment="left" title="Login" id="y3G-Ej-Fvt">
+                                    <connections>
+                                        <action selector="login" destination="olY-ID-Eug" id="yWj-tk-xfT"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="text" destination="y3G-Ej-Fvt" id="XQv-nn-joo"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-211" y="643"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="6Lv-5v-2JK">
+            <objects>
+                <controller identifier="DM" title="Messages" id="0BW-0f-B1k" customClass="DMController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <table alignment="left" id="tWb-tH-acJ">
+                            <items>
+                                <tableRow identifier="DMRow" id="7qp-G4-gHQ" customClass="DMRowController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="Fcw-ed-m7c">
+                                        <items>
+                                            <group alignment="left" radius="20" id="mGp-Lh-5dy">
+                                                <items>
+                                                    <imageView width="41" height="40" alignment="left" image="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" id="F2k-PX-o7D"/>
+                                                </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                            <group width="0.69999999999999996" alignment="left" verticalAlignment="center" id="WBP-lG-R1E">
+                                                <items>
+                                                    <label alignment="left" verticalAlignment="center" text="name" textAlignment="center" numberOfLines="0" id="iFo-b1-PKP">
+                                                        <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                                    </label>
+                                                </items>
+                                                <edgeInsets key="margins" left="10" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                        </items>
+                                        <edgeInsets key="margins" left="10" right="0.0" top="10" bottom="10"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="name" destination="iFo-b1-PKP" id="nvI-fc-bZT"/>
+                                        <outlet property="profile_pic" destination="F2k-PX-o7D" id="Qmv-rt-2dI"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="tWb-tH-acJ" id="uW3-n8-BCt"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-211" y="360"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ai" width="16" height="16"/>
+        <image name="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" width="150" height="150"/>
+    </resources>
+</document>
