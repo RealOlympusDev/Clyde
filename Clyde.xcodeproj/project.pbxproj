@@ -13,6 +13,8 @@
 		A413DA6A22C72261002F4DD5 /* Clyde WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A413DA6922C72261002F4DD5 /* Clyde WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A413DA7122C72261002F4DD5 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A413DA7022C72261002F4DD5 /* ExtensionDelegate.swift */; };
 		A413DA7522C72264002F4DD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A413DA7422C72264002F4DD5 /* Assets.xcassets */; };
+		A44593F6231A3A6D00F50754 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44593F5231A3A6D00F50754 /* Socket.swift */; };
+		A44593F8231A3B1300F50754 /* Ready.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44593F7231A3B1300F50754 /* Ready.swift */; };
 		A48D040522D4780D008F9520 /* Discord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48D03FC22D4780D008F9520 /* Discord.swift */; };
 		A48D040622D4780D008F9520 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48D03FE22D4780D008F9520 /* Message.swift */; };
 		A48D040722D4780D008F9520 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48D03FF22D4780D008F9520 /* Channel.swift */; };
@@ -116,6 +118,8 @@
 		A413DA7022C72261002F4DD5 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		A413DA7422C72264002F4DD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A413DA7622C72264002F4DD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A44593F5231A3A6D00F50754 /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		A44593F7231A3B1300F50754 /* Ready.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ready.swift; sourceTree = "<group>"; };
 		A48D03FC22D4780D008F9520 /* Discord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discord.swift; sourceTree = "<group>"; };
 		A48D03FE22D4780D008F9520 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		A48D03FF22D4780D008F9520 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
@@ -256,6 +260,8 @@
 				A48D040022D4780D008F9520 /* User.swift */,
 				A48D040122D4780D008F9520 /* Server.swift */,
 				A48D040222D4780D008F9520 /* All.swift */,
+				A44593F5231A3A6D00F50754 /* Socket.swift */,
+				A44593F7231A3B1300F50754 /* Ready.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -601,12 +607,14 @@
 				A4F9489222D47A1C004D7A08 /* MarkdownCodeEscaping.swift in Sources */,
 				A4F9489B22D47A1C004D7A08 /* MarkdownBold.swift in Sources */,
 				A4F9484F22D4790D004D7A08 /* MessageRowController.swift in Sources */,
+				A44593F8231A3B1300F50754 /* Ready.swift in Sources */,
 				A4F9489722D47A1C004D7A08 /* MarkdownItalic.swift in Sources */,
 				A4F9486722D479B7004D7A08 /* String+UTF16.swift in Sources */,
 				A4F9487922D479C4004D7A08 /* MarkdownLink+UIKit.swift in Sources */,
 				A48D040622D4780D008F9520 /* Message.swift in Sources */,
 				A4F9489522D47A1C004D7A08 /* MarkdownQuote.swift in Sources */,
 				A48D040A22D4780D008F9520 /* All.swift in Sources */,
+				A44593F6231A3A6D00F50754 /* Socket.swift in Sources */,
 				A4F9486922D479B7004D7A08 /* MarkdownLinkElement.swift in Sources */,
 				A4F9489322D47A1C004D7A08 /* MarkdownEscaping.swift in Sources */,
 				A4FA2DA822C8AA430048FB32 /* DMRowController.swift in Sources */,

@@ -55,11 +55,11 @@ class ChannelController: WKInterfaceController {
 
         let role_everyone = guild.getRole(id: guild.id!)
         
-        var permissions = role_everyone.permissions ?? PermissionType.VIEW_CHANNEL
+        var permissions = role_everyone.permissions ?? PermissionType.NONE
 
-        for role in member.roles ?? [""] {
+        for role in member.roles ?? [] {
             
-            permissions |= guild.roles?.first(where: { $0.id == role })?.permissions ?? 0x0
+            permissions |= guild.roles?.first(where: { $0.id == role})?.permissions ?? PermissionType.NONE
             
         }
 
@@ -79,12 +79,12 @@ class ChannelController: WKInterfaceController {
 
         var permissions = base_permissions
         
-        if let overwrite_everyone = channel.permission_overwrites?.first(where: { $0?.id == channel.guild_id}) {
+        if let overwrite_everyone = channel.permission_overwrites?.first(where: { $0?.id == channel.server?.id}) {
 
             permissions &= ~overwrite_everyone!.deny!
             permissions |= overwrite_everyone!.allow!
         
-        }
+        } 
 
         // Apply role specific overwrites.
         
@@ -92,7 +92,7 @@ class ChannelController: WKInterfaceController {
         var allow = PermissionType.NONE
         var deny = PermissionType.NONE
         
-        for role_id in member.roles ?? [""] {
+        for role_id in member.roles ?? [] {
             if let overwrite_role = overwrites?.first(where: { $0?.id == role_id}) {
                 allow |= overwrite_role?.allow ?? 0
                 deny |= overwrite_role?.deny ?? 0
@@ -128,10 +128,8 @@ class ChannelController: WKInterfaceController {
         hide()
         
         if let server = context as? Server {
-            
-            Discord.getChannels(server: server, completion: { channels in
                 
-                var channels = channels
+            var channels = server.channels ?? []
                 
                 var index = 0
                 
@@ -142,12 +140,16 @@ class ChannelController: WKInterfaceController {
                     index += 1
                 }
                 
-                Discord.getUser(completion: { user in
+            let member = server.members?.first(where: {$0.user?.id == user?.id})
                     
-                    Discord.getServerMember(server: server, user: user, completion: { member in
                 
-                channels = channels.sorted(by: { $0.position ?? 0 < $1.position ?? 0 }).filter({$0.type != 2 && $0.type != 4 && (self.compute_permissions(member: member, channel: $0) & PermissionType.VIEW_CHANNEL) == PermissionType.VIEW_CHANNEL})
+            channels = channels.sorted(by: { $0.position ?? 0 < $1.position ?? 0 }).filter({$0.type != 2 && $0.type != 4 && (self.compute_permissions(member: member!, channel: $0) & PermissionType.VIEW_CHANNEL) == PermissionType.VIEW_CHANNEL})
                 
+            for channel in channels {
+            
+                print(self.compute_permissions(member: member!, channel: channel))
+            }
+            
                 self.channels = channels
                 
                 //channels = channels.filter {$0.type == 4}
@@ -170,12 +172,7 @@ class ChannelController: WKInterfaceController {
                             
                 self.show()
                             
-                })
-                        
-            })
                     
-                
-            })
             
         } else if let channels = context as? [Channel] {
             

@@ -69,7 +69,7 @@ class MessageRowController: NSObject {
             
             let member = message?.member
 
-            var color = message?.server?.roles?.first(where: {$0.id == member?.roles?.first})?.color ?? 0xFFFFFF
+            var color = message?.server?.roles?.sorted(by: {$0.position! > $1.position!}).first(where: {(member?.roles?.contains($0.id) ?? false)})?.color ?? 0xFFFFFF
             
             if color == 0 {
                 color = 0xFFFFFF
