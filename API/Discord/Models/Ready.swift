@@ -14,5 +14,6 @@ public struct Ready: Codable {
     var guilds: [Server]?
     var user: User?
     var session_id: String?
+    var private_channels: [Channel]?
 
 }

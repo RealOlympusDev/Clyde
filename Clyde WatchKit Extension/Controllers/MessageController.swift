@@ -281,42 +281,45 @@ class MessageController: WKInterfaceController {
                 
             }
             
-            DispatchQueue.global().async {
-                
                 let members = channel.server?.members
                 
                  for index in 0..<(self.table?.numberOfRows ?? 0) {
                                        
-                                       guard var message = self.messages?[index] else { return }
+                       guard var message = self.messages?[index] else { return }
 
-                                       let row = self.table?.rowController(at: index) as? MessageRowController //get the row
-                                       
-                                       if let _ = message.member {
+                       let row = self.table?.rowController(at: index) as? MessageRowController //get the row
+                       
+                       if let _ = message.member {
 
-                                           
-                                       } else{
-                                           
-                                           message.addServerAndChannel(server: self.channel?.server ?? Server(), channel: self.channel ?? Channel())
-                                           
-                                          message.member = members?.first(where: {$0.user?.id == message.author?.id})
-                                           
-                                           row?.message = message
-                                       }
+                           
+                       } else{
+                           
+                           message.addServerAndChannel(server: self.channel?.server ?? Server(), channel: self.channel ?? Channel())
+                           
+                          message.member = members?.first(where: {$0.user?.id == message.author?.id})
+                           
+                           row?.message = message
+                       }
 
-
-                        }
+                }
+                
+                print(self.table?.numberOfRows ?? 0)
+            
+            self.show()
+            
+            DispatchQueue.global().asyncAfter(deadline: .now() + TimeInterval(0.1)) {
                 
                 self.table?.scrollToRow(at: (self.table?.numberOfRows ?? 0) - 1)
                 
-                self.show()
-                
+                    
             }
+            
+            self.start_websocket()
 
             
             
+            
         })
-        
-        start_websocket()
 
         
         
