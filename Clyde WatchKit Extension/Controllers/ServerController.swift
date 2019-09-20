@@ -110,13 +110,14 @@ class ServerController: WKInterfaceController {
     }
     
         func loadServers(){
-        
-        Discord.getServers(completion: { servers in
             
+        Discord.getServers(completion: { servers in
             
             let servers = servers.sorted(by: {($0.id ?? "") > ($1.id ?? "")})
             
             self.table?.setNumberOfRows(servers.count, withRowType: "ServerRow")
+            
+            let last = (self.table?.numberOfRows ?? 0) - 1
             
             for index in 0..<(self.table?.numberOfRows ?? 0) {
                 
@@ -124,13 +125,25 @@ class ServerController: WKInterfaceController {
                     
                     let row = self.table?.rowController(at: index) as? ServerRowController //get the row
                     
-                    var server = servers[index]
-                    server.addChannel(channels: channels)
-                        
-                    row?.server = server
-                    
-                    self.table?.setHidden(false)
-                    self.ai?.setHidden(true)
+                    Discord.getUser(completion: { user in
+
+                        Discord.getServerMember(server: servers[index], user: user, completion: { member in
+                                
+                            var server = servers[index]
+                            server.addChannel(channels: channels)
+                            server.addUser(user: member)
+                                
+                            row?.server = server
+                            
+                            if index == last {
+                            
+                                self.table?.setHidden(false)
+                                self.ai?.setHidden(true)
+                                
+                            }
+                            
+                        })
+                    })
                     
                 })
                 

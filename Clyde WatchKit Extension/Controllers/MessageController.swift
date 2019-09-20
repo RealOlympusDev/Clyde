@@ -15,7 +15,6 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         
     }
     
-    
     func onConnected(connection: WebSocketConnection) {
         print("Connected to Message")
     }
@@ -23,26 +22,8 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
     func onDisconnected(connection: WebSocketConnection, error: Error?) {
         print("Disconnected from Message")
         
-        webSocketConnection.connect()
+        pop()
 
-        webSocketConnection.delegate = self
-
-        let json: [String : Any] = [
-            "op": 2,
-            "d": [
-                "token": Discord.token,
-                "properties": [
-                    "os": "Linux",
-                    "browser": "Firefox",
-                    "device": ""
-                ],
-                "compress": true
-            ]
-        ]
-
-        guard let data = (try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)) else { return }
-
-        webSocketConnection.send(data: data)
     }
     
     func onError(connection: WebSocketConnection, error: Error) {
@@ -54,11 +35,9 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
                     
         let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                     
-
-
-                    if let _seq = json?["s"] as? Int {
-                        seq = _seq
-                    }
+        if let _seq = json?["s"] as? Int {
+            seq = _seq
+        }
         
         if let t = json?["t"] as? String {
             print(t)

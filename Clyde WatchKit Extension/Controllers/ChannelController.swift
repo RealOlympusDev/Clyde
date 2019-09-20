@@ -45,7 +45,7 @@ class ChannelController: WKInterfaceController {
 
         let role_everyone = guild.getRole(id: guild.id!)
         
-        var permissions = role_everyone.permissions ?? PermissionType.NONE
+        var permissions = role_everyone.permissions ?? PermissionType.VIEW_CHANNEL
 
         for role in member.roles ?? [] {
             
@@ -132,22 +132,10 @@ class ChannelController: WKInterfaceController {
                     index += 1
                 }
             
-            Discord.getUser(completion: { user in
-
-            Discord.getServerMember(server: server, user: user, completion: { member in
-
-                print(member)
 
 
-            channels = channels.sorted(by: { $0.position ?? 0 < $1.position ?? 0 }).filter({$0.type != 2 && $0.type != 4 && (self.compute_permissions(member: member, channel: $0) & PermissionType.VIEW_CHANNEL) == PermissionType.VIEW_CHANNEL})
+            channels = channels.sorted(by: { $0.position ?? 0 < $1.position ?? 0 }).filter({$0.type == 0 && (self.compute_permissions(member: server.user ?? ServerMember(), channel: $0) & PermissionType.VIEW_CHANNEL) == PermissionType.VIEW_CHANNEL})
 
-
-            for channel in channels {
-
-                print(self.compute_permissions(member: member, channel: channel))
-            }
-                
-                    channels = channels.filter {$0.type == 0}
                 
                     self.channels = channels
                     
@@ -169,12 +157,9 @@ class ChannelController: WKInterfaceController {
                                 
                     self.show()
 
-                    })
-                })
             
                             
-                    
-            
+                
         }
         
     }
