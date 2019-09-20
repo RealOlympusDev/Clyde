@@ -406,8 +406,38 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
     
      func start_websocket(){
 
-            webSocketConnection.delegate = self
+        let websocket = WebSocketTaskConnection(url: URL(string: "wss://gateway.discord.gg/?encoding=json&v=6")!)
         
+        websocket.connect()
+        
+        websocket.delegate = self
+        
+        let json: [String : Any] = [
+            "op": 2,
+            "d": [
+                "token": Discord.token,
+                "properties": [
+                    "os": "Linux",
+                    "browser": "Firefox",
+                    "device": "",
+                    "referrer": "",
+                    "referring_domain": ""
+                ],
+                "large_threshold": 100,
+                "synced_guilds": [],
+                "presence": [
+                    "status": "online",
+                    "since": 0,
+                    "afk": false,
+                    "game": nil
+                ],
+                "compress": true
+            ]
+        ]
+        
+         guard let data = (try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)) else { return }
+        
+        websocket.send(data: data)
         
                 
     }

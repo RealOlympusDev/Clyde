@@ -7,7 +7,6 @@
 //
 
 import WatchKit
-import Network
 
 class LoginController: WKInterfaceController {
     
@@ -53,125 +52,17 @@ class LoginController: WKInterfaceController {
     
 }
 
-class ServerController: WKInterfaceController, WebSocketConnectionDelegate {
-    func onMessage(connection: WebSocketConnection, text: String) {
-        
-    }
-    
-    
-    func onConnected(connection: WebSocketConnection) {
-        print("Connected to Server")
-    }
-    
-    func onDisconnected(connection: WebSocketConnection, error: Error?) {
-        print("Disconnected from Server")
-
-        webSocketConnection.connect()
-        
-        webSocketConnection.delegate = self
-            
-        
-        let json: [String : Any] = [
-            "op": 2,
-            "d": [
-                "token": Discord.token,
-                "properties": [
-                    "os": "Linux",
-                    "browser": "Firefox",
-                    "device": ""
-                ],
-                "large_threshold": 250
-            ]
-        ]
-        
-        guard let data = (try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)) else { return }
-        
-        webSocketConnection.send(data: data)
-    }
-    
-    func onError(connection: WebSocketConnection, error: Error) {
-        print("ERROR")
-    }
-    
-    func onMessage(connection: WebSocketConnection, data: Data) {
-        
-         let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-        
-        if let _seq = json?["s"] as? Int {
-            
-            seq = _seq
-            
-        }
-        
-       if let t = json?["t"] as? String {
-       
-       if(t == "READY") {
-       
-       
-       let decoder = JSONDecoder()
-
-       do {
-           
-           session_id = try! decoder.decode(Socket.self, from: data).d?.session_id
-           
-           user = try! decoder.decode(Socket.self, from: data).d?.user
-
-           var servers = try! decoder.decode(Socket.self, from: data).d?.guilds
-
-           servers = servers?.sorted(by: {($0.id ?? "") > ($1.id ?? "")})
-
-           self.table?.setNumberOfRows(servers!.count, withRowType: "ServerRow")
-
-                       for index in 0..<(self.table?.numberOfRows ?? 0) {
-
-                           let row = self.table?.rowController(at: index) as? ServerRowController //get the row
-
-
-                           row?.server = servers![index]
-
-
-
-                       }
-
-                       self.servers = servers
-
-                       self.table?.setHidden(false)
-
-                       self.ai?.setHidden(true)
-        
-
-                       return
-
-       } catch {
-
-               print(error.localizedDescription)
-
-       }
-           
-           
-       }
-       }
-           
-       
-       guard let d = json?["d"] as? [String: Any] else { return }
-
-        if let heartbeat = d["heartbeat_interval"] as? Int {
-
-            print(heartbeat)
-
-            connection.startTimer(heartbeat: heartbeat)
-        }
-        
-    }
+class ServerController: WKInterfaceController {
 
     @IBOutlet weak var table: WKInterfaceTable?
     @IBOutlet weak var ai: WKInterfaceImage?
     
-    var servers: [Server]?
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
+        
+        let row = self.table?.rowController(at: rowIndex) as? ServerRowController //get the row
  
-        self.pushController(withName: "Channel", context: self.servers?[rowIndex] ?? Server())
+        self.pushController(withName: "Channel", context: row?.server)
         
     }
     
@@ -182,7 +73,6 @@ class ServerController: WKInterfaceController, WebSocketConnectionDelegate {
         
         loadedServers = false
         
-        addMenuItem(with: UIImage(systemName: "arrow.clockwise")!, title: "Refresh", action: #selector(start_websocket))
         
     }
 
@@ -210,8 +100,7 @@ class ServerController: WKInterfaceController, WebSocketConnectionDelegate {
                 
             print(Discord.token)
                 
-
-             self.start_websocket()
+            loadServers()
 
                 
             }
@@ -220,7 +109,36 @@ class ServerController: WKInterfaceController, WebSocketConnectionDelegate {
         
     }
     
-
+        func loadServers(){
+        
+        Discord.getServers(completion: { servers in
+            
+            
+            let servers = servers.sorted(by: {($0.id ?? "") > ($1.id ?? "")})
+            
+            self.table?.setNumberOfRows(servers.count, withRowType: "ServerRow")
+            
+            for index in 0..<(self.table?.numberOfRows ?? 0) {
+                
+                Discord.getChannels(server: servers[index], completion: { channels in
+                    
+                    let row = self.table?.rowController(at: index) as? ServerRowController //get the row
+                    
+                    var server = servers[index]
+                    server.addChannel(channels: channels)
+                        
+                    row?.server = server
+                    
+                    self.table?.setHidden(false)
+                    self.ai?.setHidden(true)
+                    
+                })
+                
+            }
+            
+        })
+        
+    }
 
     
     override func willActivate() {
@@ -234,33 +152,6 @@ class ServerController: WKInterfaceController, WebSocketConnectionDelegate {
         super.didDeactivate()
     }
     
-    
-    
-
-    @objc func start_websocket(){
-        
-                webSocketConnection.delegate = self
-                    
-                
-                let json: [String : Any] = [
-                    "op": 2,
-                    "d": [
-                        "token": Discord.token,
-                        "properties": [
-                            "os": "Linux",
-                            "browser": "Firefox",
-                            "device": ""
-                        ],
-                        "large_threshold": 250
-                    ]
-                ]
-                
-                guard let data = (try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)) else { return }
-                
-                webSocketConnection.send(data: data)
-      
-                
-            }
       
 
 

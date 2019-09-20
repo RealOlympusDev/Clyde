@@ -120,6 +120,8 @@ class ChannelController: WKInterfaceController {
         if let server = context as? Server {
                 
             var channels = server.channels ?? []
+            
+            print(channels)
                 
                 var index = 0
                 
@@ -129,68 +131,49 @@ class ChannelController: WKInterfaceController {
                     
                     index += 1
                 }
-                
-            let member = server.members?.first(where: {$0.user?.id == user?.id})
-                    
-                
-            channels = channels.sorted(by: { $0.position ?? 0 < $1.position ?? 0 }).filter({$0.type != 2 && $0.type != 4 && (self.compute_permissions(member: member!, channel: $0) & PermissionType.VIEW_CHANNEL) == PermissionType.VIEW_CHANNEL})
-                
+            
+            Discord.getUser(completion: { user in
+
+            Discord.getServerMember(server: server, user: user, completion: { member in
+
+                print(member)
+
+
+            channels = channels.sorted(by: { $0.position ?? 0 < $1.position ?? 0 }).filter({$0.type != 2 && $0.type != 4 && (self.compute_permissions(member: member, channel: $0) & PermissionType.VIEW_CHANNEL) == PermissionType.VIEW_CHANNEL})
+
+
             for channel in channels {
-            
-                print(self.compute_permissions(member: member!, channel: channel))
+
+                print(self.compute_permissions(member: member, channel: channel))
             }
-            
-                self.channels = channels
                 
-                //channels = channels.filter {$0.type == 4}
+                    channels = channels.filter {$0.type == 0}
                 
-                self.categories = channels.filter {$0.type == 4}
-                
-                self.table?.setNumberOfRows(channels.count, withRowType: "ChannelRow")
-                            
-                for index in 0..<(self.table?.numberOfRows ?? 0) {
-                                
-                    let row = self.table?.rowController(at: index) as? ChannelRowController //get the row
-                                
-                    var channel = channels[index]
-                                
-                    channel.addServer(server: server)
-                                
-                    row?.channel = channel
-                                
-                }
-                            
-                self.show()
-                            
+                    self.channels = channels
                     
-            
-        } else if let channels = context as? [Channel] {
-            
-            self.table?.setNumberOfRows(channels.count, withRowType: "ChannelRow")
-            
-            for index in 0..<(self.table?.numberOfRows ?? 0) {
-                
-                let row = self.table?.rowController(at: index) as? ChannelRowController //get the row
-                
-                let channel = channels[index]
-                
-                row?.channel = channel
-                
-                Discord.getUser(completion: { user in
+                    self.categories = channels.filter {$0.type == 4}
                     
-                    Discord.getServerMember(server: channel.server!, user: user, completion: { member in
-                        
-                        print((self.compute_permissions(member: member, channel: channel) & PermissionType.VIEW_CHANNEL) == PermissionType.VIEW_CHANNEL)
-                        
+                    self.table?.setNumberOfRows(channels.count, withRowType: "ChannelRow")
+                                
+                    for index in 0..<(self.table?.numberOfRows ?? 0) {
+                                    
+                        let row = self.table?.rowController(at: index) as? ChannelRowController //get the row
+                                    
+                        var channel = channels[index]
+                                    
+                        channel.addServer(server: server)
+                                    
+                        row?.channel = channel
+                                    
+                    }
+                                
+                    self.show()
+
                     })
-                    
                 })
-                
-            }
             
-            self.channels = channels
-            
-            self.show()
+                            
+                    
             
         }
         
