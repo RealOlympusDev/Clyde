@@ -10,16 +10,17 @@ import WatchKit
 
 class ServerRowController: NSObject {
     
-    @IBOutlet weak var icon: WKInterfaceImage!
-
+    @IBOutlet weak var icon: WKInterfaceImage?
+    @IBOutlet weak var label: WKInterfaceLabel!
+    
      var server: Server? {
         
         didSet {
             
             guard let server = server else { return }
             
-            guard let icon = server.icon else { return }
-        
+            if let icon = server.icon {
+            
             let icon_url = "https://cdn.discordapp.com/icons/" + (server.id ?? "") + "/"
         
             let icon_image = icon_url + icon + ".png?size=128"
@@ -27,6 +28,21 @@ class ServerRowController: NSObject {
             print(icon_image)
         
             imageFromUrl(icon_image)
+                
+            } else {
+                
+                guard let name = server.name else { return }
+                
+                let nameArr = name.components(separatedBy: " ")
+                var title = ""
+
+                for string in nameArr {
+                    title = title + String(string.first!)
+                }
+                
+                label.setText(title)
+                
+            }
             
         }
         
@@ -46,7 +62,7 @@ class ServerRowController: NSObject {
                 if let imageData = data as Data? {
                     
                     DispatchQueue.global().async {
-                        self.icon.setImageData(imageData)
+                        self.icon?.setImageData(imageData)
                         
                     }
                 }

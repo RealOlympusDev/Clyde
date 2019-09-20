@@ -12,8 +12,8 @@ import Foundation
 
 public struct Message: Codable {
     
-    init(context: String?) {
-        self.content = context
+    init(content: String?) {
+        self.content = content
     }
     
     var attachments: [Attachment?]?

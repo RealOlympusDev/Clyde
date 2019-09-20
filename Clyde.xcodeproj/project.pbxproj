@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A40E684D2326183300CE43B0 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40E684C2326183300CE43B0 /* ComplicationController.swift */; };
 		A413DA5B22C7225D002F4DD5 /* Clyde WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A413DA5A22C7225D002F4DD5 /* Clyde WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A413DA6122C7225D002F4DD5 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A413DA5F22C7225D002F4DD5 /* Interface.storyboard */; };
 		A413DA6322C72261002F4DD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A413DA6222C72261002F4DD5 /* Assets.xcassets */; };
@@ -21,7 +22,7 @@
 		A48D040822D4780D008F9520 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48D040022D4780D008F9520 /* User.swift */; };
 		A48D040922D4780D008F9520 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48D040122D4780D008F9520 /* Server.swift */; };
 		A48D040A22D4780D008F9520 /* All.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48D040222D4780D008F9520 /* All.swift */; };
-		A4C076B022D5D91A00457628 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C076AF22D5D91A00457628 /* WebSocket.swift */; };
+		A4CC3C5823236AE800F30F3A /* WebSocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC3C5723236AE800F30F3A /* WebSocketConnection.swift */; };
 		A4F9484E22D4790D004D7A08 /* ChannelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9484A22D4790D004D7A08 /* ChannelController.swift */; };
 		A4F9484F22D4790D004D7A08 /* MessageRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9484B22D4790D004D7A08 /* MessageRowController.swift */; };
 		A4F9485022D4790D004D7A08 /* ChannelRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9484C22D4790D004D7A08 /* ChannelRowController.swift */; };
@@ -109,6 +110,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A40E684C2326183300CE43B0 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		A413DA5622C7225D002F4DD5 /* Clyde.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clyde.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A413DA5A22C7225D002F4DD5 /* Clyde WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clyde WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A413DA6022C7225D002F4DD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -126,7 +128,7 @@
 		A48D040022D4780D008F9520 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A48D040122D4780D008F9520 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		A48D040222D4780D008F9520 /* All.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = All.swift; sourceTree = "<group>"; };
-		A4C076AF22D5D91A00457628 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		A4CC3C5723236AE800F30F3A /* WebSocketConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketConnection.swift; sourceTree = "<group>"; };
 		A4F9484A22D4790D004D7A08 /* ChannelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelController.swift; sourceTree = "<group>"; };
 		A4F9484B22D4790D004D7A08 /* MessageRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRowController.swift; sourceTree = "<group>"; };
 		A4F9484C22D4790D004D7A08 /* ChannelRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelRowController.swift; sourceTree = "<group>"; };
@@ -303,7 +305,8 @@
 			isa = PBXGroup;
 			children = (
 				A413DA7022C72261002F4DD5 /* ExtensionDelegate.swift */,
-				A4C076AF22D5D91A00457628 /* WebSocket.swift */,
+				A4CC3C5723236AE800F30F3A /* WebSocketConnection.swift */,
+				A40E684C2326183300CE43B0 /* ComplicationController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				A4F9489922D47A1C004D7A08 /* MarkdownLink.swift in Sources */,
 				A413DA7122C72261002F4DD5 /* ExtensionDelegate.swift in Sources */,
 				A4F9486622D479B7004D7A08 /* MarkdownParser.swift in Sources */,
+				A4CC3C5823236AE800F30F3A /* WebSocketConnection.swift in Sources */,
 				A48D040822D4780D008F9520 /* User.swift in Sources */,
 				A48D040922D4780D008F9520 /* Server.swift in Sources */,
 				A4F9486822D479B7004D7A08 /* MarkdownCommonElement.swift in Sources */,
@@ -601,7 +605,6 @@
 				A4F9487D22D479C4004D7A08 /* Typealias.swift in Sources */,
 				A4F9485322D4791B004D7A08 /* ServerRowController.swift in Sources */,
 				A4F9489822D47A1C004D7A08 /* MarkdownAutomaticLink.swift in Sources */,
-				A4C076B022D5D91A00457628 /* WebSocket.swift in Sources */,
 				A4F9485122D4790D004D7A08 /* MessageController.swift in Sources */,
 				A4F9487B22D479C4004D7A08 /* MarkdownParser+UIKit.swift in Sources */,
 				A4F9489222D47A1C004D7A08 /* MarkdownCodeEscaping.swift in Sources */,
@@ -620,6 +623,7 @@
 				A4FA2DA822C8AA430048FB32 /* DMRowController.swift in Sources */,
 				A4F9489C22D47A1C004D7A08 /* MarkdownHeader.swift in Sources */,
 				A4FA2DAA22C8ABA40048FB32 /* DMController.swift in Sources */,
+				A40E684D2326183300CE43B0 /* ComplicationController.swift in Sources */,
 				A4F9484E22D4790D004D7A08 /* ChannelController.swift in Sources */,
 				A4F9489622D47A1C004D7A08 /* MarkdownCode.swift in Sources */,
 			);
@@ -771,7 +775,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Clyde WatchKit Extension/Clyde WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 72UM5XF97Y;
 				INFOPLIST_FILE = "Clyde WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -797,7 +801,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Clyde WatchKit Extension/Clyde WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 72UM5XF97Y;
 				INFOPLIST_FILE = "Clyde WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -822,7 +826,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 72UM5XF97Y;
 				IBSC_MODULE = Clyde_WatchKit_Extension;
 				INFOPLIST_FILE = "Clyde WatchKit App/Info.plist";
@@ -842,7 +846,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 72UM5XF97Y;
 				IBSC_MODULE = Clyde_WatchKit_Extension;
 				INFOPLIST_FILE = "Clyde WatchKit App/Info.plist";
@@ -860,7 +864,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 72UM5XF97Y;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = reuben.Clyde;
@@ -873,7 +877,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 72UM5XF97Y;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = reuben.Clyde;

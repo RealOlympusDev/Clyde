@@ -34,16 +34,6 @@ class ChannelController: WKInterfaceController {
             self.pushController(withName: "Message", context: self.channels?[rowIndex])
            
             
-        } else {
-            
-//            let channels = self.channels?.filter {$0.parent_id == categories?[rowIndex].id}
-//
-//            if channels?.isEmpty ?? true{
-//                return
-//            }
-//
-//            self.pushController(withName: "Channel", context: channels)
-            
         }
         
     }

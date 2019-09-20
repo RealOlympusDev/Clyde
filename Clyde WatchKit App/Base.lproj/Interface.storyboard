@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14865.1" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KxN-oi-agB">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14868" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KxN-oi-agB">
     <device id="watch44"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14642"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14643"/>
     </dependencies>
     <scenes>
         <!--Servers-->
@@ -14,19 +14,24 @@
                         <table alignment="left" id="uny-0b-Gsq">
                             <items>
                                 <tableRow identifier="ServerRow" id="mAa-a7-CF7" customClass="ServerRowController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" contentMode="scaleAspectFill" id="DE5-RW-JXK">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" contentMode="scaleAspectFill" layout="overlap" id="DE5-RW-JXK">
                                         <items>
                                             <group alignment="center" verticalAlignment="center" radius="60" id="gQv-Tb-R0i">
                                                 <items>
                                                     <imageView width="120" height="120" alignment="center" verticalAlignment="center" image="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" contentMode="scaleAspectFill" id="6LN-by-KdF"/>
                                                 </items>
                                             </group>
+                                            <label alignment="center" verticalAlignment="center" id="vvI-kw-56V">
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="font" type="system" pointSize="50"/>
+                                            </label>
                                         </items>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="10"/>
                                     </group>
                                     <connections>
                                         <outlet property="icon" destination="6LN-by-KdF" id="WFN-W2-gya"/>
+                                        <outlet property="label" destination="vvI-kw-56V" id="hgZ-UF-rPo"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -91,7 +96,7 @@
                                                         <items>
                                                             <group alignment="left" radius="14" id="cOU-j9-ZgX">
                                                                 <items>
-                                                                    <imageView width="30" height="30" alignment="left" image="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" id="OAQ-aK-2Au"/>
+                                                                    <imageView width="30" height="30" alignment="left" image="Icon-24" id="OAQ-aK-2Au"/>
                                                                 </items>
                                                             </group>
                                                         </items>
@@ -200,7 +205,7 @@
                                         <items>
                                             <group alignment="left" radius="20" id="mGp-Lh-5dy">
                                                 <items>
-                                                    <imageView width="40" height="40" alignment="left" image="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" id="F2k-PX-o7D"/>
+                                                    <imageView width="40" height="40" alignment="left" image="Icon-24" id="F2k-PX-o7D"/>
                                                 </items>
                                                 <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                             </group>
@@ -234,6 +239,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon-24" width="24" height="24"/>
         <image name="ai" width="16" height="16"/>
         <image name="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" width="150" height="150"/>
     </resources>

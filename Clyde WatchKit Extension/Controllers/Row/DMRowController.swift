@@ -25,8 +25,13 @@ class DMRowController: NSObject {
             
             self.name?.setText(recipients.first?.username)
             
-            let image_url = "https://cdn.discordapp.com/avatars/" + (recipients.first?.id ?? "") + "/"
-            let image_profile = image_url + (recipients.first?.avatar ?? "") + ".png"
+            guard let recipient = recipients.first?.id else { return }
+            
+            guard let avatar = recipients.first?.avatar else { return }
+            
+            let image_url = "https://cdn.discordapp.com/avatars/" + recipient + "/"
+            let image_profile = image_url + avatar + ".png"
+            
             imageFromUrl(image_profile, image: profile_pic!)
             
         }

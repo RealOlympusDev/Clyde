@@ -92,8 +92,41 @@ class MessageRowController: NSObject {
             
             if let mentions = message?.mentions {
                 for mention in mentions{
+                    
                     let old_text = "<@" + (mention?.id ?? "") + ">"
                     text = text.replacingOccurrences(of: old_text, with: "@" + (mention?.username ?? ""))
+                    
+                    let old_text2 = "<@!" + (mention?.id ?? "") + ">"
+                    if let nick = message?.server?.members?.first(where: {$0.user?.id == mention?.id})?.nick {
+                        text = text.replacingOccurrences(of: old_text2, with: "@" + nick)
+                    } else {
+                        text = text.replacingOccurrences(of: old_text2, with: "@" + (mention?.username ?? ""))
+                    }
+                    
+                }
+            }
+            
+            
+            if let emojis = message?.server?.emojis {
+                for emoji in emojis{
+                    
+                        
+                        let old_text = "<a:" + emoji.name + ":" + emoji.id + ">"
+                        text = text.replacingOccurrences(of: old_text, with: "a:" + emoji.name + ":")
+                        
+                        let old_text2 = "<:" + emoji.name + ":" + emoji.id + ">"
+                        text = text.replacingOccurrences(of: old_text2, with: ":" + emoji.name + ":")
+                        
+                
+                }
+            }
+            
+            if let channels = message?.server?.channels {
+                for channel in channels {
+                    if let id = channel.id {
+                    let old_text = "<#" + id + ">"
+                        text = text.replacingOccurrences(of: old_text, with: "#" + (channel.name ?? ""))
+                    }
                 }
             }
             
@@ -114,14 +147,23 @@ class MessageRowController: NSObject {
                 
             guard let range = (parse.string as? NSString)?.range(of: " (edited)") else { return }
                 
-        parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], range: range)
+            parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], range: range)
             
+            
+            if let channels = message?.server?.channels {
+                for channel in channels {
+                    
+                    guard let range = (parse.string as? NSString)?.range(of: "#" + (channel.name ?? "")) else { return }
+                    parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range)
+                    
+                }
+            }
             
             if let mentions = message?.mentions {
                 for mention in mentions{
                     
-                    guard let range2 = (parse.string as? NSString)?.range(of: "@" + (mention?.username ?? "")) else { return }
-                    parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range2)
+                    guard let range = (parse.string as? NSString)?.range(of: "@" + (mention?.username ?? "")) else { return }
+                    parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range)
                 }
             }
             
@@ -130,9 +172,9 @@ class MessageRowController: NSObject {
                     
                     let role = message?.server?.roles?.first(where: {$0.id == role_id})
                     
-                    guard let range3 = (parse.string as? NSString)?.range(of: "@" + (role?.name ?? "")) else { return }
+                    guard let range = (parse.string as? NSString)?.range(of: "@" + (role?.name ?? "")) else { return }
                     
-                    parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(rgb: role?.color ?? 0x0293CA)], range: range3)
+                    parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(rgb: role?.color ?? 0x0293CA)], range: range)
                 }
             }
             
