@@ -8,9 +8,57 @@
 
 import WatchKit
 
+class CodeController: WKInterfaceController {
+
+   var code: String? = ""
+    
+    @IBAction func code(_ value: NSString?) {
+        
+        code = value as? String
+        
+    }
+    
+    @IBAction func enterCode() {
+        
+        if code != "" {
+            
+            Discord.mfa(code: code!, completion: { token in
+                 
+                let defaults = UserDefaults.standard
+                 
+                 defaults.set(token, forKey: "token")
+                 
+                 self.dismiss()
+                 
+             }, errorHandler: { error in
+                
+                self.presentAlert(withTitle: "Oops", message: error, preferredStyle: .alert, actions: [WKAlertAction(title: "Ok", style: .default, handler: {
+                    
+                    
+                })])
+                 
+             })
+            
+            
+        }
+        
+    }
+    
+    
+}
+
 class LoginController: WKInterfaceController {
     
     @IBOutlet weak var text: WKInterfaceButton?
+    
+    override func didAppear() {
+        
+        let defaults = UserDefaults.standard
+    
+        if(defaults.string(forKey: "token") != nil){
+            self.dismiss()
+        }
+    }
     
     var email: String? = ""
     
@@ -38,9 +86,17 @@ class LoginController: WKInterfaceController {
                 
             }, errorHandler: { (error) in
                 
+                if error == "MFA Required." {
+                    
+                    self.presentController(withName: "Code", context: nil)
+                    
+                } else {
+                
                 self.presentAlert(withTitle: "Oops", message: error, preferredStyle: .alert, actions: [WKAlertAction(title: "Ok", style: .default, handler: {
                     
                 })])
+                    
+                }
                 
             })
             
@@ -148,6 +204,12 @@ class ServerController: WKInterfaceController {
                 })
                 
             }
+            
+        }, errorHandler: { error in
+            
+            self.presentAlert(withTitle: "Oops", message: error, preferredStyle: .alert, actions: [WKAlertAction(title: "Ok", style: .default, handler: {
+                
+            })])
             
         })
         

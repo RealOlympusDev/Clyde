@@ -237,6 +237,37 @@
             </objects>
             <point key="canvasLocation" x="-211" y="360"/>
         </scene>
+        <!--Code-->
+        <scene sceneID="Bv1-ru-7d2">
+            <objects>
+                <controller identifier="Code" id="trB-tN-Gt8" customClass="CodeController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" spacing="20" id="nko-Se-1CL">
+                            <items>
+                                <label alignment="center" text="Please Enter Your Discord 2FA Code" textAlignment="center" numberOfLines="2" id="jnq-Tr-5OY">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <group width="1" alignment="left" layout="vertical" id="iEt-1o-jQY">
+                                    <items>
+                                        <textField width="1" alignment="left" placeholder="Code" textContentType="one-time-code" id="mwz-xp-giA">
+                                            <connections>
+                                                <action selector="code:" destination="trB-tN-Gt8" id="kPt-6i-DSE"/>
+                                            </connections>
+                                        </textField>
+                                    </items>
+                                </group>
+                                <button width="1" alignment="left" title="Enter code" id="iyq-c7-jYr">
+                                    <connections>
+                                        <action selector="enterCode" destination="trB-tN-Gt8" id="K5C-32-QlW"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="53" y="643"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Icon-24" width="24" height="24"/>

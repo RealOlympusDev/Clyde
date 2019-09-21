@@ -149,7 +149,7 @@ class WebSocketTaskConnection: NSObject, WebSocketConnection {
         case .setup:
             print("Setting up...")
         case .waiting(let error):
-            self.delegate?.onDisconnected(connection: self, error: error)
+            print()
         case .preparing:
             print("Preparing...")
         case .ready:

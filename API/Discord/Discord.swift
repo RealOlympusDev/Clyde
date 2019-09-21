@@ -11,8 +11,50 @@ import WatchKit
 public class Discord {
     
     public static var token: String?
+    public static var ticket: String?
     
     public static var message_count: Int = 0
+    
+    public static func mfa(code: String, completion: @escaping (String) -> (),  errorHandler: @escaping (String) -> ()){
+        
+          
+          let parameters: [String: Any] = [
+                  "code": code,
+                  "ticket": Discord.ticket
+              ]
+              
+              var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/auth/mfa/totp")!)
+              request.httpMethod = "POST"
+              request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+              request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+              
+              let session = URLSession(configuration: .default)
+              
+              let task = session.dataTask(with: request, completionHandler: { result, response , error  in
+                  
+                  guard let json = result else {
+                    errorHandler("Invaild code.")
+                    return }
+                  
+                guard let result = try? JSONSerialization.jsonObject(with: json, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any] else {
+                    errorHandler("Invaild code.")
+                    return }
+                
+                  guard let token = result["token"] as? String else {
+                    errorHandler("Invaild code.")
+                    return
+                    }
+                
+                    Discord.token = token
+                
+                    completion(token)
+                
+                  
+              })
+        
+            task.resume()
+                                
+    }
     
     public static func login(email: String, password: String, completion: @escaping (String) -> (),  errorHandler: @escaping (String) -> ()) {
         
@@ -34,16 +76,40 @@ public class Discord {
             
                         guard let json = result else {
                             errorHandler("Invaild username or password.")
-                            return }
-            
-                        guard let result = try? JSONSerialization.jsonObject(with: json, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: String] else {
-                            errorHandler("Invaild username or password.")
                             return
                             
+                    }
+            
+                        guard let result = try? JSONSerialization.jsonObject(with: json, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any] else {
+                            errorHandler("Invaild username or password.")
+                            return
                         }
             
-                        guard let token = result["token"] else {
-                            errorHandler("Invaild username or password.")
+                        print(result)
+            
+                        guard let token = result["token"] as? String else {
+                            
+                            guard let mfa = result["mfa"] as? Bool else {
+                                errorHandler("Invaild username or password.")
+                                return
+                            }
+                            
+                            
+                            if mfa {
+                                
+                                guard let ticket = result["ticket"] as? String else {
+                                  errorHandler("Invaild username or password.")
+                                      return
+                                }
+                                
+                                Discord.ticket = ticket
+                
+                                errorHandler("MFA Required.")
+                                
+                            } else {
+                                errorHandler("Invaild username or password.")
+                            }
+                            
                             return
                         }
             
@@ -57,9 +123,11 @@ public class Discord {
                      task.resume()
         }
         
-
-        
-    }
+    
+    
+    
+}
+    
     
     public static func sendStartTyping(channel: Channel){
         
@@ -288,7 +356,9 @@ public class Discord {
                 completion(server)
                 
             } catch {
-                print(error.localizedDescription)
+                
+                
+                
             }
             
             
@@ -300,7 +370,7 @@ public class Discord {
     }
     
     
-    public static func getServers(completion: @escaping ([Server]) -> ()){
+    public static func getServers(completion: @escaping ([Server]) -> (), errorHandler: @escaping (String) -> ()){
         
         guard let token = Discord.token else { return }
         
@@ -323,7 +393,7 @@ public class Discord {
                 completion(server)
 
             } catch {
-                print(error.localizedDescription)
+                errorHandler(error.localizedDescription)
             }
             
             
