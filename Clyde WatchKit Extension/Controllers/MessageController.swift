@@ -8,7 +8,6 @@
 
 import WatchKit
 import Network
-import UserNotifications
 
 class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
     func onMessage(connection: WebSocketConnection, text: String) {
@@ -39,9 +38,19 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
             seq = _seq
         }
         
-        if let t = json?["t"] as? String {
-            print(t)
+        if let d = json?["d"] as? [String: Any] {
+            
+            if let heartbeat_interval = d["heartbeat_interval"] as? Int {
+                
+                print(heartbeat_interval)
+                
+                connection.startTimer(heartbeat: heartbeat_interval)
+                
+            }
+            
+            
         }
+        
 
                     if json?["t"] as? String == "MESSAGE_CREATE" {
                         
@@ -224,16 +233,16 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
                                                let message = (user?.user?.username ?? "Someone") + " is typing..."
                                                
                                                
-                                                self.message?.setPlaceholder(message)
+                                                self.message.setTitle(message)
                                             
                                             DispatchQueue.global().asyncAfter(deadline: .now() + TimeInterval(5)) {
                                                 
                                                 if let name = self.channel?.name {
                                                     
-                                                    self.message?.setPlaceholder("Message #" + name)
+                                                    self.message.setTitle("Message #" + name)
                                                     
                                                 } else {
-                                                    self.message?.setPlaceholder("Message @" + (self.channel?.recipients?.first?.username ?? ""))
+                                                    self.message.setTitle("Message @" + (self.channel?.recipients?.first?.username ?? ""))
                                                 }
                                                 
                                             }
@@ -257,7 +266,7 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
 
     var channel: Channel?
 
-    @IBOutlet weak var message: WKInterfaceTextField?
+    @IBOutlet weak var message: WKInterfaceButton!
     
     var lastMessage: Message?
 
@@ -285,9 +294,6 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         })
     }
 
-    func test(){
-        print("test")
-    }
 
     override func awake(withContext context: Any?) {
         
@@ -308,13 +314,13 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         
         if let name = channel.name {
             
-            self.message?.setPlaceholder("Message #" + name)
+            self.message?.setTitle("Message #" + name)
             
         } else {
-            self.message?.setPlaceholder("Message @" + (channel.recipients?.first?.username ?? ""))
+            self.message?.setTitle("Message @" + (channel.recipients?.first?.username ?? ""))
         }
         
-        Discord.getMessages(channel: channel, limit: 20, completion: { messages in
+        Discord.getMessages(channel: channel, completion: { messages in
             
             let messages = messages.reversed().map({$0})
             
@@ -332,9 +338,10 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
                 
                 row?.message = message
                 
-                row?.lastMessage = self.lastMessage
-                
-                self.lastMessage = message
+                if (message.type == MessageTypes.DEFAULT){
+                    row?.lastMessage = self.lastMessage
+                    self.lastMessage = message
+                }
                 
             }
             
@@ -421,16 +428,14 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
                 
     }
     
-
     
-    
-    @IBAction func send_message(_ value: NSString?) {
+    @IBAction func send_message() {
         
-        let text = value as String?
-        
-        if text == "" {
-            return
-        }
+      self.presentTextInputController(withSuggestions:nil, allowedInputMode: .allowEmoji, completion: { (results) in
+                      
+        guard let responses = results else { return }
+                      
+        let text = responses[0] as? String
         
         guard let channel = self.channel else { return }
         
@@ -446,9 +451,10 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         
         self.presentAlert(withTitle: nil, message: text, preferredStyle: .actionSheet, actions: [message])
         
-        self.message?.setText("")
-        
+    })
     }
+    
+    
     
 }
 

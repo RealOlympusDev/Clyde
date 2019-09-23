@@ -90,6 +90,16 @@ class MessageRowController: NSObject {
             }
             
             
+            let regex1 = try! NSRegularExpression(pattern: "<(:[a-zA-z_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
+            let range1 = NSMakeRange(0, text.count)
+            text = regex1.stringByReplacingMatches(in: text, options: [], range: range1, withTemplate: "$1")
+            
+            let regex2 = try! NSRegularExpression(pattern: "<a(:[a-zA-z_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
+            let range2 = NSMakeRange(0, text.count)
+            text = regex2.stringByReplacingMatches(in: text, options: [], range: range2, withTemplate: "$1")
+            
+            
+            
             if let mentions = message?.mentions {
                 for mention in mentions{
                     
@@ -105,50 +115,105 @@ class MessageRowController: NSObject {
                     
                 }
             }
-            
-            
-            if let emojis = message?.server?.emojis {
-                for emoji in emojis{
-                    
-                        
-                        let old_text = "<a:" + emoji.name + ":" + emoji.id + ">"
-                        text = text.replacingOccurrences(of: old_text, with: "a:" + emoji.name + ":")
-                        
-                        let old_text2 = "<:" + emoji.name + ":" + emoji.id + ">"
-                        text = text.replacingOccurrences(of: old_text2, with: ":" + emoji.name + ":")
-                        
-                
-                }
-            }
-            
-            if let channels = message?.server?.channels {
-                for channel in channels {
-                    if let id = channel.id {
-                    let old_text = "<#" + id + ">"
-                        text = text.replacingOccurrences(of: old_text, with: "#" + (channel.name ?? ""))
-                    }
-                }
-            }
-            
+
+
             if let roles = message?.mention_roles {
                 for role_id in roles{
-                    
+
                     let role = message?.server?.roles?.first(where: {$0.id == role_id})
-                    
+
                     let old_text = "<@&" + (role?.id ?? "") + ">"
-                    
+
                     text = text.replacingOccurrences(of: old_text, with: "@" + (role?.name ?? ""))
                 }
+            }
+            
+            
+            if let channels = message?.server?.channels {
+                for channel in channels{
+
+                    let old_text = "<#" + (channel.id  ?? "") + ">"
+
+                    text = text.replacingOccurrences(of: old_text, with: "#" + (channel.name ?? ""))
+                }
+            }
+            
+            if(message?.type == MessageTypes.CALL){
+                top_group?.setHidden(true)
+            
+                text = "→ " + (message?.author?.username ?? "") + " started a call."
+                
+            } else if(message?.type == MessageTypes.GUILD_MEMBER_JOIN){
+                top_group?.setHidden(true)
+            
+                text = "→ " + (message?.author?.username ?? "") + " joined the server!"
+                
+            } else if(message?.type == MessageTypes.RECIPIENT_ADD){
+                top_group?.setHidden(true)
+            
+                text = "→ " + (message?.author?.username ?? "") + " added someone to the group."
+                
+            } else if(message?.type == MessageTypes.RECIPIENT_REMOVE){
+                top_group?.setHidden(true)
+            
+                text = "→ " + (message?.author?.username ?? "") + " removed someone from the group."
+                
+            } else if(message?.type == MessageTypes.CHANNEL_NAME_CHANGE){
+                top_group?.setHidden(true)
+           
+                text = "→ " + (message?.author?.username ?? "") + " changed the channel name."
+               
+            } else if(message?.type == MessageTypes.CHANNEL_ICON_CHANGE){
+                top_group?.setHidden(true)
+                      
+                text = "→ " + (message?.author?.username ?? "") + " changed the channel icon."
+                          
+            } else if(message?.type == MessageTypes.CHANNEL_PINNED_MESSAGE){
+                top_group?.setHidden(true)
+                      
+                text = "→ " + (message?.author?.username ?? "") + " pinned a message."
+                          
+            } else if(message?.type != MessageTypes.DEFAULT){
+                top_group?.setHidden(true)
+                      
+                self.text?.setHidden(true)
+                          
             }
             
             let markdownParser = MarkdownParser(font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body))
                 
             guard let parse = markdownParser.parse(text) as? NSMutableAttributedString else { return }
+            
                 
             guard let range = (parse.string as? NSString)?.range(of: " (edited)") else { return }
+            
+            if(message?.type != MessageTypes.DEFAULT){
+                
+                parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], range: NSMakeRange(0, text.count))
+                
+                guard let range = (parse.string as? NSString)?.range(of: "→") else { return }
+                    
+                parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(rgb: 0x43B581), NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)], range: range)
+                
+                
+                
+                guard let range2 = (parse.string as? NSString)?.range(of: message?.author?.username ?? "") else { return }
+                    
+                parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], range: range2)
+                
+            }
                 
             parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], range: range)
             
+            
+            
+            if let mentions = message?.mentions {
+                for mention in mentions{
+                    
+                    guard let range = (parse.string as? NSString)?.range(of: "@" + (mention?.username ?? "")) else { return }
+                    parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range)
+                }
+            }
             
             if let channels = message?.server?.channels {
                 for channel in channels {
@@ -159,31 +224,32 @@ class MessageRowController: NSObject {
                 }
             }
             
-            if let mentions = message?.mentions {
-                for mention in mentions{
-                    
-                    guard let range = (parse.string as? NSString)?.range(of: "@" + (mention?.username ?? "")) else { return }
-                    parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range)
-                }
-            }
-            
             if let roles = message?.mention_roles {
                 for role_id in roles{
-                    
+
                     let role = message?.server?.roles?.first(where: {$0.id == role_id})
-                    
+
                     guard let range = (parse.string as? NSString)?.range(of: "@" + (role?.name ?? "")) else { return }
-                    
+
                     parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(rgb: role?.color ?? 0x0293CA)], range: range)
                 }
             }
+
             
             self.text?.setAttributedText(parse)
             
-            let image_url = "https://cdn.discordapp.com/avatars/" + (message?.author?.id ?? "") + "/"
-            let image_profile = image_url + (message?.author?.avatar ?? "") + ".png?size=40"
+            if let id = message?.author?.id {
+                
+                if let avatar = message?.author?.avatar {
             
-            imageFromUrl(image_profile, image: profile_pic)
+                    let image_url = "https://cdn.discordapp.com/avatars/" + id + "/"
+                    let image_profile = image_url + avatar + ".png?size=40"
+            
+                    imageFromUrl(image_profile, image: profile_pic)
+                    
+                }
+                
+            }
             
             guard let attachments = message?.attachments else {
                 
@@ -255,4 +321,20 @@ extension UIColor {
             blue: rgb & 0xFF
         )
     }
+}
+
+struct MessageTypes {
+    static let DEFAULT = 0
+    static let RECIPIENT_ADD = 1
+    static let RECIPIENT_REMOVE = 2
+    static let CALL = 3
+    static let CHANNEL_NAME_CHANGE = 4
+    static let CHANNEL_ICON_CHANGE = 5
+    static let CHANNEL_PINNED_MESSAGE = 6
+    static let GUILD_MEMBER_JOIN = 7
+    static let USER_PREMIUM_GUILD_SUBSCRIPTION = 8
+    static let USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1 = 9
+    static let USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2 = 10
+    static let USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3 = 11
+    static let CHANNEL_FOLLOW_ADD = 12
 }

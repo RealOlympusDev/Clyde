@@ -6,6 +6,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14643"/>
     </dependencies>
     <scenes>
+        <!--FlickType-->
+        <scene sceneID="zbM-IP-aJe">
+            <objects>
+                <controllerPlaceholder referencedIdentifier="FlickType" id="cra-HF-eGN"/>
+            </objects>
+            <point key="canvasLocation" x="-639" y="452"/>
+        </scene>
         <!--Servers-->
         <scene sceneID="5S1-Bk-tax">
             <objects>
@@ -132,13 +139,15 @@
                                 </tableRow>
                             </items>
                         </table>
-                        <group width="1" alignment="left" id="9TQ-cV-QBD">
+                        <group width="1" alignment="left" layout="vertical" id="9TQ-cV-QBD">
                             <items>
-                                <textField width="1" alignment="left" verticalAlignment="bottom" placeholder="Message" id="8Lw-9c-pHH">
+                                <button width="1" alignment="left" title="Message" id="SUC-gi-Rzq">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" type="system" pointSize="15"/>
                                     <connections>
-                                        <action selector="send_message:" destination="uCB-NO-pex" id="nLN-G7-8zC"/>
+                                        <action selector="send_message" destination="uCB-NO-pex" id="y19-jc-hKB"/>
                                     </connections>
-                                </textField>
+                                </button>
                             </items>
                             <edgeInsets key="margins" left="0.0" right="0.0" top="20" bottom="0.0"/>
                         </group>
@@ -147,7 +156,7 @@
                     <connections>
                         <outlet property="ai" destination="mTQ-7l-U14" id="7R0-Jy-ojc"/>
                         <outlet property="group" destination="9TQ-cV-QBD" id="l8V-9l-vQl"/>
-                        <outlet property="message" destination="8Lw-9c-pHH" id="72v-Ce-5zR"/>
+                        <outlet property="message" destination="SUC-gi-Rzq" id="ahZ-MO-i1J"/>
                         <outlet property="table" destination="xZX-s8-5ND" id="jhA-ef-wfR"/>
                     </connections>
                 </controller>

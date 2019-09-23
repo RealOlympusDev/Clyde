@@ -15,6 +15,16 @@ class DMController: WKInterfaceController {
     
     var channels: [Channel]?
     
+    func show(){
+        table?.setHidden(false)
+        ai?.setHidden(true)
+    }
+
+    func hide(){
+        table?.setHidden(true)
+        ai?.setHidden(false)
+    }
+    
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         
         self.pushController(withName: "Message", context: channels?[rowIndex])
@@ -22,6 +32,8 @@ class DMController: WKInterfaceController {
     }
     
     override func awake(withContext context: Any?) {
+        
+        hide()
         
         let defaults = UserDefaults.standard
         
@@ -46,10 +58,11 @@ class DMController: WKInterfaceController {
                 row?.channel = channels[index]
                     
             }
+            
+            self.show()
                 
         })
-        
-        self.ai?.setHidden(true)
+    
         
     }
     

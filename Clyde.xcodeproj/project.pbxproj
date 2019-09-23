@@ -21,6 +21,14 @@
 		A48D040722D4780D008F9520 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48D03FF22D4780D008F9520 /* Channel.swift */; };
 		A48D040822D4780D008F9520 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48D040022D4780D008F9520 /* User.swift */; };
 		A48D040922D4780D008F9520 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48D040122D4780D008F9520 /* Server.swift */; };
+		A4B5652F233629AC009CF2BA /* FlickTypeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B56527233629AC009CF2BA /* FlickTypeKit.framework */; };
+		A4B56530233629AC009CF2BA /* select-framework.sh in Resources */ = {isa = PBXBuildFile; fileRef = A4B56528233629AC009CF2BA /* select-framework.sh */; };
+		A4B56531233629AC009CF2BA /* select-framework.sh in Resources */ = {isa = PBXBuildFile; fileRef = A4B56528233629AC009CF2BA /* select-framework.sh */; };
+		A4B56532233629AC009CF2BA /* FlickTypeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B5652A233629AC009CF2BA /* FlickTypeKit.framework */; };
+		A4B56538233629C4009CF2BA /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = A4B5652D233629AC009CF2BA /* keyboard.png */; };
+		A4B56539233629C4009CF2BA /* FlickType.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4B5652E233629AC009CF2BA /* FlickType.storyboard */; };
+		A4B5653B233629E1009CF2BA /* FlickTypeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B5653A233629E1009CF2BA /* FlickTypeKit.framework */; };
+		A4B5653C233629E1009CF2BA /* FlickTypeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4B5653A233629E1009CF2BA /* FlickTypeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A4CC3C5823236AE800F30F3A /* WebSocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC3C5723236AE800F30F3A /* WebSocketConnection.swift */; };
 		A4F9484E22D4790D004D7A08 /* ChannelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9484A22D4790D004D7A08 /* ChannelController.swift */; };
 		A4F9484F22D4790D004D7A08 /* MessageRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9484B22D4790D004D7A08 /* MessageRowController.swift */; };
@@ -36,7 +44,6 @@
 		A4F9486C22D479B7004D7A08 /* MarkdownStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9485C22D479B7004D7A08 /* MarkdownStyle.swift */; };
 		A4F9487822D479C4004D7A08 /* MarkdownCode+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9486F22D479C3004D7A08 /* MarkdownCode+UIKit.swift */; };
 		A4F9487922D479C4004D7A08 /* MarkdownLink+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9487122D479C3004D7A08 /* MarkdownLink+UIKit.swift */; };
-		A4F9487A22D479C4004D7A08 /* MarkdownHeader+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9487322D479C3004D7A08 /* MarkdownHeader+UIKit.swift */; };
 		A4F9487B22D479C4004D7A08 /* MarkdownParser+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9487422D479C3004D7A08 /* MarkdownParser+UIKit.swift */; };
 		A4F9487C22D479C4004D7A08 /* UIFont+Traits.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9487622D479C3004D7A08 /* UIFont+Traits.swift */; };
 		A4F9487D22D479C4004D7A08 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9487722D479C4004D7A08 /* Typealias.swift */; };
@@ -50,7 +57,6 @@
 		A4F9489922D47A1C004D7A08 /* MarkdownLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9488B22D47A1B004D7A08 /* MarkdownLink.swift */; };
 		A4F9489A22D47A1C004D7A08 /* MarkdownList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9488D22D47A1C004D7A08 /* MarkdownList.swift */; };
 		A4F9489B22D47A1C004D7A08 /* MarkdownBold.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9488F22D47A1C004D7A08 /* MarkdownBold.swift */; };
-		A4F9489C22D47A1C004D7A08 /* MarkdownHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9489122D47A1C004D7A08 /* MarkdownHeader.swift */; };
 		A4F948A022D47C47004D7A08 /* ServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9489F22D47C47004D7A08 /* ServerController.swift */; };
 		A4FA2DA822C8AA430048FB32 /* DMRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA2DA722C8AA430048FB32 /* DMRowController.swift */; };
 		A4FA2DAA22C8ABA40048FB32 /* DMController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA2DA922C8ABA40048FB32 /* DMController.swift */; };
@@ -96,12 +102,13 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A421D4C622CB07D300155886 /* Embed Frameworks */ = {
+		A4FF2FE62336255A00EFFDA3 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A4B5653C233629E1009CF2BA /* FlickTypeKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +133,13 @@
 		A48D03FF22D4780D008F9520 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		A48D040022D4780D008F9520 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A48D040122D4780D008F9520 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		A4B56527233629AC009CF2BA /* FlickTypeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FlickTypeKit.framework; sourceTree = "<group>"; };
+		A4B56528233629AC009CF2BA /* select-framework.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "select-framework.sh"; sourceTree = "<group>"; };
+		A4B5652A233629AC009CF2BA /* FlickTypeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FlickTypeKit.framework; sourceTree = "<group>"; };
+		A4B5652B233629AC009CF2BA /* FlickTypeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FlickTypeKit.framework; sourceTree = "<group>"; };
+		A4B5652D233629AC009CF2BA /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard.png; sourceTree = "<group>"; };
+		A4B5652E233629AC009CF2BA /* FlickType.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FlickType.storyboard; sourceTree = "<group>"; };
+		A4B5653A233629E1009CF2BA /* FlickTypeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlickTypeKit.framework; path = FlickTypeKit/FlickTypeKit.framework; sourceTree = "<group>"; };
 		A4CC3C5723236AE800F30F3A /* WebSocketConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketConnection.swift; sourceTree = "<group>"; };
 		A4F9484A22D4790D004D7A08 /* ChannelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelController.swift; sourceTree = "<group>"; };
 		A4F9484B22D4790D004D7A08 /* MessageRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRowController.swift; sourceTree = "<group>"; };
@@ -141,7 +155,6 @@
 		A4F9485C22D479B7004D7A08 /* MarkdownStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownStyle.swift; sourceTree = "<group>"; };
 		A4F9486F22D479C3004D7A08 /* MarkdownCode+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MarkdownCode+UIKit.swift"; sourceTree = "<group>"; };
 		A4F9487122D479C3004D7A08 /* MarkdownLink+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MarkdownLink+UIKit.swift"; sourceTree = "<group>"; };
-		A4F9487322D479C3004D7A08 /* MarkdownHeader+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MarkdownHeader+UIKit.swift"; sourceTree = "<group>"; };
 		A4F9487422D479C3004D7A08 /* MarkdownParser+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MarkdownParser+UIKit.swift"; sourceTree = "<group>"; };
 		A4F9487622D479C3004D7A08 /* UIFont+Traits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Traits.swift"; sourceTree = "<group>"; };
 		A4F9487722D479C4004D7A08 /* Typealias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
@@ -155,10 +168,10 @@
 		A4F9488B22D47A1B004D7A08 /* MarkdownLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownLink.swift; sourceTree = "<group>"; };
 		A4F9488D22D47A1C004D7A08 /* MarkdownList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownList.swift; sourceTree = "<group>"; };
 		A4F9488F22D47A1C004D7A08 /* MarkdownBold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownBold.swift; sourceTree = "<group>"; };
-		A4F9489122D47A1C004D7A08 /* MarkdownHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownHeader.swift; sourceTree = "<group>"; };
 		A4F9489F22D47C47004D7A08 /* ServerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerController.swift; sourceTree = "<group>"; };
 		A4FA2DA722C8AA430048FB32 /* DMRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMRowController.swift; sourceTree = "<group>"; };
 		A4FA2DA922C8ABA40048FB32 /* DMController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMController.swift; sourceTree = "<group>"; };
+		A4FF2FC8233622D300EFFDA3 /* FlickTypeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlickTypeKit.framework; path = "../../Downloads/FlickTypeKit-xcode11b4/FlickTypeKit Sample (Swift)/FlickTypeKit/FlickTypeKit.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +179,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4B56532233629AC009CF2BA /* FlickTypeKit.framework in Frameworks */,
+				A4B5653B233629E1009CF2BA /* FlickTypeKit.framework in Frameworks */,
+				A4B5652F233629AC009CF2BA /* FlickTypeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +191,7 @@
 		A413DA4F22C7225D002F4DD5 = {
 			isa = PBXGroup;
 			children = (
+				A4B56524233629AC009CF2BA /* FlickTypeKit */,
 				A48D03FA22D4780D008F9520 /* API */,
 				A413DA5E22C7225D002F4DD5 /* Clyde WatchKit App */,
 				A413DA6D22C72261002F4DD5 /* Clyde WatchKit Extension */,
@@ -217,6 +234,8 @@
 		A421D4C322CB07D300155886 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4B5653A233629E1009CF2BA /* FlickTypeKit.framework */,
+				A4FF2FC8233622D300EFFDA3 /* FlickTypeKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -287,6 +306,52 @@
 			path = WatchKit;
 			sourceTree = "<group>";
 		};
+		A4B56524233629AC009CF2BA /* FlickTypeKit */ = {
+			isa = PBXGroup;
+			children = (
+				A4B56525233629AC009CF2BA /* _internal */,
+				A4B5652B233629AC009CF2BA /* FlickTypeKit.framework */,
+				A4B5652C233629AC009CF2BA /* App Resources */,
+			);
+			name = FlickTypeKit;
+			path = "../../Downloads/FlickTypeKit-master 2/FlickTypeKit Sample (Swift)/FlickTypeKit";
+			sourceTree = "<group>";
+		};
+		A4B56525233629AC009CF2BA /* _internal */ = {
+			isa = PBXGroup;
+			children = (
+				A4B56526233629AC009CF2BA /* watchos */,
+				A4B56528233629AC009CF2BA /* select-framework.sh */,
+				A4B56529233629AC009CF2BA /* watchsimulator */,
+			);
+			path = _internal;
+			sourceTree = "<group>";
+		};
+		A4B56526233629AC009CF2BA /* watchos */ = {
+			isa = PBXGroup;
+			children = (
+				A4B56527233629AC009CF2BA /* FlickTypeKit.framework */,
+			);
+			path = watchos;
+			sourceTree = "<group>";
+		};
+		A4B56529233629AC009CF2BA /* watchsimulator */ = {
+			isa = PBXGroup;
+			children = (
+				A4B5652A233629AC009CF2BA /* FlickTypeKit.framework */,
+			);
+			path = watchsimulator;
+			sourceTree = "<group>";
+		};
+		A4B5652C233629AC009CF2BA /* App Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A4B5652D233629AC009CF2BA /* keyboard.png */,
+				A4B5652E233629AC009CF2BA /* FlickType.storyboard */,
+			);
+			path = "App Resources";
+			sourceTree = "<group>";
+		};
 		A4F8310C2318B1AC00D97EB9 /* Row */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,7 +398,6 @@
 			children = (
 				A4F9486E22D479C3004D7A08 /* Code */,
 				A4F9487022D479C3004D7A08 /* Link */,
-				A4F9487222D479C3004D7A08 /* Header */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -354,14 +418,6 @@
 			path = Link;
 			sourceTree = "<group>";
 		};
-		A4F9487222D479C3004D7A08 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				A4F9487322D479C3004D7A08 /* MarkdownHeader+UIKit.swift */,
-			);
-			path = Header;
-			sourceTree = "<group>";
-		};
 		A4F9487522D479C3004D7A08 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,7 +436,6 @@
 				A4F9488922D47A1B004D7A08 /* Link */,
 				A4F9488C22D47A1C004D7A08 /* List */,
 				A4F9488E22D47A1C004D7A08 /* Bold */,
-				A4F9489022D47A1C004D7A08 /* Header */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -444,14 +499,6 @@
 			path = Bold;
 			sourceTree = "<group>";
 		};
-		A4F9489022D47A1C004D7A08 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				A4F9489122D47A1C004D7A08 /* MarkdownHeader.swift */,
-			);
-			path = Header;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -496,7 +543,8 @@
 				A413DA6522C72261002F4DD5 /* Sources */,
 				A413DA6622C72261002F4DD5 /* Frameworks */,
 				A413DA6722C72261002F4DD5 /* Resources */,
-				A421D4C622CB07D300155886 /* Embed Frameworks */,
+				A4FF2FDF2336233B00EFFDA3 /* ShellScript */,
+				A4FF2FE62336255A00EFFDA3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -553,6 +601,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4B56530233629AC009CF2BA /* select-framework.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +609,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4B56538233629C4009CF2BA /* keyboard.png in Resources */,
+				A4B56539233629C4009CF2BA /* FlickType.storyboard in Resources */,
 				A413DA6322C72261002F4DD5 /* Assets.xcassets in Resources */,
 				A413DA6122C7225D002F4DD5 /* Interface.storyboard in Resources */,
 			);
@@ -570,10 +621,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				A413DA7522C72264002F4DD5 /* Assets.xcassets in Resources */,
+				A4B56531233629AC009CF2BA /* select-framework.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A4FF2FDF2336233B00EFFDA3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -eu\n\"${PROJECT_DIR}/FlickTypeKit/_internal/select-framework.sh\" \"${PLATFORM_NAME}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A413DA6522C72261002F4DD5 /* Sources */ = {
@@ -590,7 +662,6 @@
 				A48D040522D4780D008F9520 /* Discord.swift in Sources */,
 				A4F9486A22D479B7004D7A08 /* MarkdownLevelElement.swift in Sources */,
 				A48D040722D4780D008F9520 /* Channel.swift in Sources */,
-				A4F9487A22D479C4004D7A08 /* MarkdownHeader+UIKit.swift in Sources */,
 				A4F9489922D47A1C004D7A08 /* MarkdownLink.swift in Sources */,
 				A413DA7122C72261002F4DD5 /* ExtensionDelegate.swift in Sources */,
 				A4F9486622D479B7004D7A08 /* MarkdownParser.swift in Sources */,
@@ -617,7 +688,6 @@
 				A4F9486922D479B7004D7A08 /* MarkdownLinkElement.swift in Sources */,
 				A4F9489322D47A1C004D7A08 /* MarkdownEscaping.swift in Sources */,
 				A4FA2DA822C8AA430048FB32 /* DMRowController.swift in Sources */,
-				A4F9489C22D47A1C004D7A08 /* MarkdownHeader.swift in Sources */,
 				A4FA2DAA22C8ABA40048FB32 /* DMController.swift in Sources */,
 				A40E684D2326183300CE43B0 /* ComplicationController.swift in Sources */,
 				A4F9484E22D4790D004D7A08 /* ChannelController.swift in Sources */,
@@ -773,6 +843,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 72UM5XF97Y;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FlickTypeKit/_internal/watchos",
+					"$(PROJECT_DIR)/FlickTypeKit/_internal/watchsimulator",
+					"$(PROJECT_DIR)/FlickTypeKit",
+				);
 				INFOPLIST_FILE = "Clyde WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -799,6 +875,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 72UM5XF97Y;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FlickTypeKit/_internal/watchos",
+					"$(PROJECT_DIR)/FlickTypeKit/_internal/watchsimulator",
+					"$(PROJECT_DIR)/FlickTypeKit",
+				);
 				INFOPLIST_FILE = "Clyde WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

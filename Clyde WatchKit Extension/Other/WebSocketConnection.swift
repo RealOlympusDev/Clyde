@@ -45,7 +45,7 @@ class WebSocketTaskConnection: NSObject, WebSocketConnection {
         let parameters = NWParameters.tls
         let websocketOptions = NWProtocolWebSocket.Options()
         websocketOptions.autoReplyPing = true
-        parameters.defaultProtocolStack.applicationProtocols.insert(websocketOptions, at: 0)
+    parameters.defaultProtocolStack.applicationProtocols.insert(websocketOptions, at: 0)
 
 
 
@@ -92,6 +92,7 @@ class WebSocketTaskConnection: NSObject, WebSocketConnection {
         websocketConnection?.start(queue: clientQueue)
 
         listen()
+
     }
 
     func disconnect() {

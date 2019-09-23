@@ -16,24 +16,34 @@ public struct Message: Codable {
         self.content = content
     }
     
-    var attachments: [Attachment?]?
-    var tts: Bool?
-    var embeds: [Embeds?]?
-    var timestamp: String?
-    var mention_everyone: Bool?
     var id: String?
-    var pinned: Bool?
-    var edited_timestamp: String?
-    var author: User?
-    var mention_roles: [String?]?
-    var content: String?
     var channel_id: String?
+    var guild_id: String?
+    var author: User?
+    var member: ServerMember?
+    var content: String?
+    var timestamp: String?
+    var edited_timestamp: String?
+    var tts: Bool?
+    var mention_everyone: Bool?
     var mentions: [User?]?
+    var mention_roles: [String?]?
+    var mention_channels: [String?]?
+    var attachments: [Attachment?]?
+    var embeds: [Embeds?]?
+    var reactions: [Reaction]?
+    var nonce: String?
+    var pinned: Bool?
+    var webhook_id: String?
     var type: Int?
+    var activity: [MessageActivity]?
+    var application: [MessageApplication]?
+    var message_reference: [MessageReference]?
+    var flags: [Int]?
+    
     var code: Int?
     var message: String?
     
-    var member: ServerMember?
     
     var server: Server?
     var channel: Channel?
@@ -43,6 +53,31 @@ public struct Message: Codable {
         self.channel = channel
     }
     
+}
+
+public struct MessageActivity: Codable {
+    var type: Int?
+    var party_id: String?
+}
+
+public struct MessageApplication: Codable {
+    var id: String?
+    var cover_image: String?
+    var description: String?
+    var icon: String?
+    var name: String?
+}
+
+public struct MessageReference: Codable {
+    var message_id: String?
+    var channel_id: String?
+    var guild_id: String?
+}
+
+public struct Reaction: Codable {
+    var count: Int?
+    var me: Bool?
+    var emoji: Emoji?
 }
 
 public struct Attachment: Codable {

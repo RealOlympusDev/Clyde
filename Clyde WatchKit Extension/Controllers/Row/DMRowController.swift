@@ -27,6 +27,7 @@ class DMRowController: NSObject {
             
             guard let recipient = recipients.first?.id else { return }
             
+            
             guard let avatar = recipients.first?.avatar else { return }
             
             let image_url = "https://cdn.discordapp.com/avatars/" + recipient + "/"

@@ -46,7 +46,7 @@ public struct Server: Codable {
         return roles?.first(where: {$0.id == id}) ?? Role()
     }
     
-    mutating func addChannel(channels: [Channel]){
+    mutating func addChannels(channels: [Channel]){
         self.channels = channels
     }
     
@@ -77,8 +77,8 @@ public struct Role: Codable{
 }
 
 public struct Emoji: Codable{
-    var id: String
-    var name: String
+    var id: String?
+    var name: String?
     var roles: [Role]?
     var user: User?
     var require_colons: Bool?

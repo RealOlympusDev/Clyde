@@ -47,7 +47,6 @@ open class MarkdownParser {
   open var customElements: [MarkdownElement]
   
   // MARK: Basic Elements
-  public let header: MarkdownHeader
   public let list: MarkdownList
   public let quote: MarkdownQuote
   public let link: MarkdownLink
@@ -89,7 +88,6 @@ open class MarkdownParser {
     self.font = font
     self.color = color
     
-    header = MarkdownHeader(font: font)
     list = MarkdownList(font: font)
     quote = MarkdownQuote(font: font)
     link = MarkdownLink(font: font)
@@ -143,7 +141,6 @@ open class MarkdownParser {
   fileprivate func updateDefaultElements() {
     let pairs: [(EnabledElements, MarkdownElement)] = [
       (.automaticLink, automaticLink),
-      (.header, header),
       (.list, list),
       (.quote, quote),
       (.link, link),

@@ -177,31 +177,38 @@ class ServerController: WKInterfaceController {
             
             for index in 0..<(self.table?.numberOfRows ?? 0) {
                 
-                Discord.getChannels(server: servers[index], completion: { channels in
+                Discord.getServer(server: servers[index], completion: { server in
                     
-                    let row = self.table?.rowController(at: index) as? ServerRowController //get the row
-                    
-                    Discord.getUser(completion: { user in
+                    Discord.getChannels(server: server, completion: { channels in
+                        
+                        let row = self.table?.rowController(at: index) as? ServerRowController //get the row
+                        
+                        Discord.getUser(completion: { user in
 
-                        Discord.getServerMember(server: servers[index], user: user, completion: { member in
+                            Discord.getServerMember(server: server, user: user, completion: { member in
+                                    
+                                var _server = server
+                                _server.addChannels(channels: channels)
+                                _server.addUser(user: member)
+                                    
+                                row?.server = _server
                                 
-                            var server = servers[index]
-                            server.addChannel(channels: channels)
-                            server.addUser(user: member)
+                                if index == last {
                                 
-                            row?.server = server
-                            
-                            if index == last {
-                            
-                                self.table?.setHidden(false)
-                                self.ai?.setHidden(true)
+                                    self.table?.setHidden(false)
+                                    self.ai?.setHidden(true)
+                                    
+                                }
                                 
-                            }
-                            
+                            })
                         })
+                        
                     })
                     
+                    
+                    
                 })
+                
                 
             }
             
