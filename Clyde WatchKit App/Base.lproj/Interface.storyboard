@@ -46,6 +46,15 @@
                         </table>
                         <imageView alignment="center" verticalAlignment="center" image="ai" id="3qa-GL-amm"/>
                     </items>
+                    <menu key="menu" id="fkH-XG-2ZH">
+                        <items>
+                            <menuItem title="Logout" image="logout" id="j0r-sU-Nmq">
+                                <connections>
+                                    <action selector="logout" destination="KxN-oi-agB" id="rqf-ZK-fjb"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="ai" destination="3qa-GL-amm" id="inu-TP-N5P"/>
                         <outlet property="table" destination="uny-0b-Gsq" id="SqZ-Ym-wEO"/>
@@ -103,7 +112,7 @@
                                                         <items>
                                                             <group alignment="left" radius="14" id="cOU-j9-ZgX">
                                                                 <items>
-                                                                    <imageView width="30" height="30" alignment="left" image="Icon-24" id="OAQ-aK-2Au"/>
+                                                                    <imageView width="30" height="30" alignment="left" id="OAQ-aK-2Au"/>
                                                                 </items>
                                                             </group>
                                                         </items>
@@ -282,5 +291,6 @@
         <image name="Icon-24" width="24" height="24"/>
         <image name="ai" width="16" height="16"/>
         <image name="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" width="150" height="150"/>
+        <image name="logout" width="30" height="30"/>
     </resources>
 </document>

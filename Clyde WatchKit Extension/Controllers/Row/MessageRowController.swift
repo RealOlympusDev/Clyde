@@ -40,6 +40,7 @@ class MessageRowController: NSObject {
         
         didSet {
             
+            
             image?.setHidden(true)
             
             let cal = Calendar(identifier: .iso8601)
@@ -56,9 +57,7 @@ class MessageRowController: NSObject {
             if let lastDate = formatter.date(from: lastMessage?.timestamp ?? "") {
             
             let string = formatDate(date: date)
-
-            print(string)
-            
+                
             top_group?.setHidden(cal.compare(lastDate, to: date, toGranularity: .hour) == .orderedSame && message?.author?.username == lastMessage?.author?.username)
                 
             }
@@ -89,12 +88,33 @@ class MessageRowController: NSObject {
                 
             }
             
+            print(message?.embeds)
             
-            let regex1 = try! NSRegularExpression(pattern: "<(:[a-zA-z_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
+            if text == "" {
+                
+                if let embed = message?.embeds?.first {
+                    
+                    if let name = embed?.author?.name {
+                        text += ("**" + name + "**\n\n")
+                    }
+                    
+                    if let title = embed?.title {
+                        text += title + "\n\n"
+                    }
+                    
+                    text += embed?.description ?? ""
+                    
+                }
+                
+            }
+            
+            
+            
+            let regex1 = try! NSRegularExpression(pattern: "<(:[a-zA-z0-9_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
             let range1 = NSMakeRange(0, text.count)
             text = regex1.stringByReplacingMatches(in: text, options: [], range: range1, withTemplate: "$1")
             
-            let regex2 = try! NSRegularExpression(pattern: "<a(:[a-zA-z_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
+            let regex2 = try! NSRegularExpression(pattern: "<a(:[a-zA-z0-9_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
             let range2 = NSMakeRange(0, text.count)
             text = regex2.stringByReplacingMatches(in: text, options: [], range: range2, withTemplate: "$1")
             
@@ -207,12 +227,18 @@ class MessageRowController: NSObject {
             
             
             
-            if let mentions = message?.mentions {
+            if var mentions = message?.mentions {
+                
                 for mention in mentions{
-                    
                     guard let range = (parse.string as? NSString)?.range(of: "@" + (mention?.username ?? "")) else { return }
                     parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range)
                 }
+                
+                guard let range = (parse.string as? NSString)?.range(of: "@everyone") else { return }
+                parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range)
+                
+                guard let range2 = (parse.string as? NSString)?.range(of: "@here") else { return }
+                parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range2)
             }
             
             if let channels = message?.server?.channels {

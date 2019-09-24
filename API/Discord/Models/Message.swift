@@ -98,10 +98,18 @@ public struct Embeds: Codable {
     var color: Int?
     var provider: Provider?
     var timestamp: String?
-    var author: User?
+    var author: EmbedAuthor?
     var type: String?
     var thumbnail: Attachment?
 }
+
+public struct EmbedAuthor: Codable {
+    var url: String?
+    var name: String?
+    var icon_url: String?
+    var proxy_icon_url: String?
+}
+
 
 public struct Footer: Codable {
     var text: String?

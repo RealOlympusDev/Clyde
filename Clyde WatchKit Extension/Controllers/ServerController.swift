@@ -131,6 +131,23 @@ class ServerController: WKInterfaceController {
         
         
     }
+    
+    @IBAction func logout() {
+        
+        let defaults = UserDefaults.standard
+        defaults.set(nil, forKey: "token")
+        
+        Discord.token = nil
+        
+        loadedServers = false
+        
+        self.table?.setHidden(true)
+        self.ai?.setHidden(false)
+        
+        didAppear()
+        
+    }
+
 
     
     override func didAppear() {

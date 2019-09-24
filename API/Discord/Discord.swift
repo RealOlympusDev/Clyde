@@ -63,6 +63,8 @@ public class Discord {
             "password": password
         ]
         
+        
+        
         var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/auth/login")!)
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
@@ -88,6 +90,11 @@ public class Discord {
                         print(result)
             
                         guard let token = result["token"] as? String else {
+                            
+                            if let _ = result["captcha_key"] as? [Any]  {
+                                errorHandler("Captcha key required. Please login via Discord and then try again.")
+                                return
+                            }
                             
                             guard let mfa = result["mfa"] as? Bool else {
                                 errorHandler("Invaild username or password.")
@@ -158,7 +165,7 @@ public class Discord {
         let parameters: [String: Any]  = [
             "content": message,
             "tts": false,
-            "nonce": Discord.message_count
+            "nonce": String(Discord.message_count)
         ]
         
         Discord.message_count += 1
@@ -176,7 +183,7 @@ public class Discord {
         
         let task = session.dataTask(with: request, completionHandler: { result, response , error  in
             
-                guard let json = result else { return }
+            guard let json = result else { return }
     
                 let decoder = JSONDecoder()
     
@@ -454,6 +461,8 @@ public class Discord {
         let task = session.dataTask(with: request, completionHandler: { result, response , error  in
             
             guard let json = result else { return }
+            
+            print(String(data: json, encoding: .utf8)!)
             
             let decoder = JSONDecoder()
 

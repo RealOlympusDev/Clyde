@@ -31,6 +31,19 @@ class DMController: WKInterfaceController {
         
     }
     
+    @IBAction func logout() {
+        
+        let defaults = UserDefaults.standard
+        defaults.set(nil, forKey: "token")
+        
+        Discord.token = nil
+        
+        popToRootController()
+        
+    }
+    
+    
+    
     override func awake(withContext context: Any?) {
         
         hide()
