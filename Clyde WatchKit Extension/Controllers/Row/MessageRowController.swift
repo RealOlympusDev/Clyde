@@ -42,27 +42,6 @@ class MessageRowController: NSObject {
             
             
             image?.setHidden(true)
-            
-            let cal = Calendar(identifier: .iso8601)
-            
-            let formatter = DateFormatter()
-            
-            formatter.calendar = cal
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-            
-            if let date = formatter.date(from: message?.timestamp ?? "") {
-            
-            if let lastDate = formatter.date(from: lastMessage?.timestamp ?? "") {
-            
-            let string = formatDate(date: date)
-                
-            top_group?.setHidden(cal.compare(lastDate, to: date, toGranularity: .hour) == .orderedSame && message?.author?.username == lastMessage?.author?.username)
-                
-            }
-                
-            }
                 
             username?.setText(message?.author?.username)
             
@@ -88,7 +67,7 @@ class MessageRowController: NSObject {
                 
             }
             
-            print(message?.embeds)
+            print(message?.embeds ?? "")
             
             if text == "" {
                 
@@ -108,6 +87,27 @@ class MessageRowController: NSObject {
                 
             }
             
+            let cal = Calendar(identifier: .iso8601)
+            
+            let formatter = DateFormatter()
+            
+            formatter.calendar = cal
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+            
+            if let date = formatter.date(from: message?.timestamp ?? "") {
+            
+            if let lastDate = formatter.date(from: lastMessage?.timestamp ?? "") {
+            
+            let _ = formatDate(date: date)
+                
+            top_group?.setHidden(cal.compare(lastDate, to: date, toGranularity: .hour) == .orderedSame && message?.author?.username == lastMessage?.author?.username)
+                
+                
+            }
+                
+            }
             
             
             let regex1 = try! NSRegularExpression(pattern: "<(:[a-zA-z0-9_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
@@ -205,19 +205,19 @@ class MessageRowController: NSObject {
             guard let parse = markdownParser.parse(text) as? NSMutableAttributedString else { return }
             
                 
-            guard let range = (parse.string as? NSString)?.range(of: " (edited)") else { return }
+            guard let range = (parse.string as NSString?)?.range(of: " (edited)") else { return }
             
             if(message?.type != MessageTypes.DEFAULT){
                 
                 parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], range: NSMakeRange(0, text.count))
                 
-                guard let range = (parse.string as? NSString)?.range(of: "→") else { return }
+                guard let range = (parse.string as NSString?)?.range(of: "→") else { return }
                     
                 parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(rgb: 0x43B581), NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)], range: range)
                 
                 
                 
-                guard let range2 = (parse.string as? NSString)?.range(of: message?.author?.username ?? "") else { return }
+                guard let range2 = (parse.string as NSString?)?.range(of: message?.author?.username ?? "") else { return }
                     
                 parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], range: range2)
                 
@@ -227,24 +227,24 @@ class MessageRowController: NSObject {
             
             
             
-            if var mentions = message?.mentions {
+            if let mentions = message?.mentions {
                 
                 for mention in mentions{
-                    guard let range = (parse.string as? NSString)?.range(of: "@" + (mention?.username ?? "")) else { return }
+                    guard let range = (parse.string as NSString?)?.range(of: "@" + (mention?.username ?? "")) else { return }
                     parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range)
                 }
                 
-                guard let range = (parse.string as? NSString)?.range(of: "@everyone") else { return }
+                guard let range = (parse.string as NSString?)?.range(of: "@everyone") else { return }
                 parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range)
                 
-                guard let range2 = (parse.string as? NSString)?.range(of: "@here") else { return }
+                guard let range2 = (parse.string as NSString?)?.range(of: "@here") else { return }
                 parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range2)
             }
             
             if let channels = message?.server?.channels {
                 for channel in channels {
                     
-                    guard let range = (parse.string as? NSString)?.range(of: "#" + (channel.name ?? "")) else { return }
+                    guard let range = (parse.string as NSString?)?.range(of: "#" + (channel.name ?? "")) else { return }
                     parse.addAttributes([NSAttributedString.Key.foregroundColor: MarkdownLink.defaultColor], range: range)
                     
                 }
@@ -255,7 +255,7 @@ class MessageRowController: NSObject {
 
                     let role = message?.server?.roles?.first(where: {$0.id == role_id})
 
-                    guard let range = (parse.string as? NSString)?.range(of: "@" + (role?.name ?? "")) else { return }
+                    guard let range = (parse.string as NSString?)?.range(of: "@" + (role?.name ?? "")) else { return }
 
                     parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(rgb: role?.color ?? 0x0293CA)], range: range)
                 }

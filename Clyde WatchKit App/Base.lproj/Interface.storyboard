@@ -6,13 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14643"/>
     </dependencies>
     <scenes>
-        <!--FlickType-->
-        <scene sceneID="zbM-IP-aJe">
-            <objects>
-                <controllerPlaceholder referencedIdentifier="FlickType" id="cra-HF-eGN"/>
-            </objects>
-            <point key="canvasLocation" x="-639" y="452"/>
-        </scene>
         <!--Servers-->
         <scene sceneID="5S1-Bk-tax">
             <objects>
@@ -260,25 +253,20 @@
             <objects>
                 <controller identifier="Code" id="trB-tN-Gt8" customClass="CodeController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" spacing="20" id="nko-Se-1CL">
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" spacing="25" id="nko-Se-1CL">
                             <items>
-                                <label alignment="center" text="Please Enter Your Discord 2FA Code" textAlignment="center" numberOfLines="2" id="jnq-Tr-5OY">
+                                <label alignment="center" verticalAlignment="center" text="Please Enter Your Discord 2FA Code" textAlignment="center" numberOfLines="2" id="jnq-Tr-5OY">
                                     <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                 </label>
-                                <group width="1" alignment="left" layout="vertical" id="iEt-1o-jQY">
+                                <group width="1" alignment="left" verticalAlignment="center" layout="vertical" id="iEt-1o-jQY">
                                     <items>
-                                        <textField width="1" alignment="left" placeholder="Code" textContentType="one-time-code" id="mwz-xp-giA">
+                                        <textField width="1" alignment="left" verticalAlignment="center" placeholder="Enter Code" textContentType="one-time-code" id="mwz-xp-giA">
                                             <connections>
                                                 <action selector="code:" destination="trB-tN-Gt8" id="kPt-6i-DSE"/>
                                             </connections>
                                         </textField>
                                     </items>
                                 </group>
-                                <button width="1" alignment="left" title="Enter code" id="iyq-c7-jYr">
-                                    <connections>
-                                        <action selector="enterCode" destination="trB-tN-Gt8" id="K5C-32-QlW"/>
-                                    </connections>
-                                </button>
                             </items>
                         </group>
                     </items>
@@ -291,6 +279,6 @@
         <image name="Icon-24" width="24" height="24"/>
         <image name="ai" width="16" height="16"/>
         <image name="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" width="150" height="150"/>
-        <image name="logout" width="30" height="30"/>
+        <image name="logout" width="35" height="35"/>
     </resources>
 </document>

@@ -20,7 +20,7 @@ public class Discord {
           
           let parameters: [String: Any] = [
                   "code": code,
-                  "ticket": Discord.ticket
+                  "ticket": Discord.ticket ?? ""
               ]
               
               var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/auth/mfa/totp")!)

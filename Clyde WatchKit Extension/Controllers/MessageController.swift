@@ -7,7 +7,6 @@
 //
 
 import WatchKit
-import Network
 
 class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
     
@@ -157,7 +156,7 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
 
                             guard let parse = markdownParser.parse(text) as? NSMutableAttributedString else { return }
 
-                            guard let range = (parse.string as? NSString)?.range(of: " (edited)") else { return }
+                                guard let range = (parse.string as NSString?)?.range(of: " (edited)") else { return }
 
                             parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], range: range)
 
@@ -281,17 +280,6 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         ai?.setHidden(false)
     }
 
-    func didRecieve(connection: NWConnection){
-        
-
-        connection.receiveMessage(completion: { data, context, complete, error in
-            
-            self.didRecieve(connection: connection)
-            
-        })
-    }
-
-
     override func awake(withContext context: Any?) {
         
         hide()
@@ -375,12 +363,9 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
                     
             }
             
-            self.start_websocket()
-
-            
-            
-            
         })
+        
+        self.start_websocket()
 
         
         
@@ -398,7 +383,7 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         let json: [String : Any] = [
             "op": 2,
             "d": [
-                "token": Discord.token,
+                "token": Discord.token ?? "",
                 "properties": [
                     "os": "Linux",
                     "browser": "Firefox",
@@ -407,13 +392,6 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
                     "referring_domain": ""
                 ],
                 "large_threshold": 100,
-                "synced_guilds": [],
-                "presence": [
-                    "status": "online",
-                    "since": 0,
-                    "afk": false,
-                    "game": nil
-                ],
                 "compress": true
             ]
         ]
@@ -441,38 +419,6 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         let message = WKAlertAction(title: "Message", style: .default) {
             
             Discord.sendMessage(channel: channel, message: text ?? "", completion: { message in
-
-//                self.messages?.append(message)
-//
-//                self.table?.insertRows(at: IndexSet(integer: (self.messages?.count ?? 0) - 1), withRowType: "MessageRow")
-//
-//                let row = self.table?.rowController(at: (self.table?.numberOfRows ?? 0) - 1) as? MessageRowController //get the row
-//
-//                 let cal = Calendar(identifier: .iso8601)
-//
-//                 let formatter = DateFormatter()
-//
-//                 formatter.calendar = cal
-//                 formatter.locale = Locale(identifier: "en_US_POSIX")
-//                 formatter.timeZone = TimeZone(secondsFromGMT: 0)
-//                 formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-//
-//                if let date = formatter.date(from: message.timestamp ?? "") {
-//
-//                if let lastDate = formatter.date(from: self.lastMessage?.timestamp ?? "") {
-//
-//                    row?.top_group?.setHidden(cal.compare(lastDate, to: date, toGranularity: .hour) == .orderedSame && message.author?.username == self.lastMessage?.author?.username)
-//
-//                }
-//
-//                }
-//
-//
-//                row?.message = message
-//
-//                self.lastMessage = message
-//
-//                self.table?.scrollToRow(at: (self.table?.numberOfRows ?? 0) - 1)
                 
             })
             

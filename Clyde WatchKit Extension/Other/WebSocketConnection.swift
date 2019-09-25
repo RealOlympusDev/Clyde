@@ -65,7 +65,7 @@ class WebSocketTaskConnection: NSObject, WebSocketConnection {
                 
                 let response : [String: Any] = [
                     "op": 1,
-                    "d": seq ?? nil
+                    "d": seq ?? 0
                 ]
                 
                 guard let data = (try? JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)) else {
@@ -149,7 +149,7 @@ class WebSocketTaskConnection: NSObject, WebSocketConnection {
         switch state {
         case .setup:
             print("Setting up...")
-        case .waiting(let error):
+        case .waiting:
             print()
         case .preparing:
             print("Preparing...")
@@ -159,6 +159,8 @@ class WebSocketTaskConnection: NSObject, WebSocketConnection {
             self.delegate?.onDisconnected(connection: self, error: error)
         case .cancelled:
             self.delegate?.onDisconnected(connection: self, error: nil)
+        @unknown default:
+            print()
         }
     }
 }

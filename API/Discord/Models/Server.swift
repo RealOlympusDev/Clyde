@@ -53,6 +53,10 @@ public struct Server: Codable {
     mutating func addUser(user: ServerMember){
         self.user = user
     }
+    
+    mutating func addMembers(members: [ServerMember]){
+        self.members = members
+    }
 }
 
 public struct ServerMember: Codable {

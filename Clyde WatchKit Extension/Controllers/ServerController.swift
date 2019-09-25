@@ -10,15 +10,10 @@ import WatchKit
 
 class CodeController: WKInterfaceController {
 
-   var code: String? = ""
     
     @IBAction func code(_ value: NSString?) {
         
-        code = value as? String
-        
-    }
-    
-    @IBAction func enterCode() {
+        let code = value as String?
         
         if code != "" {
             
@@ -60,9 +55,17 @@ class LoginController: WKInterfaceController {
         }
     }
     
-    var email: String? = ""
+    #if DEBUG
     
+    var email: String? = "reuben.catchpole@gmail.com"
+    var password: String? = "Computer1233"
+    
+    #else
+    
+    var email: String? = ""
     var password: String? = ""
+    
+    #endif
     
     @IBAction func email(_ value: NSString?) {
         email = value as String?
@@ -171,7 +174,7 @@ class ServerController: WKInterfaceController {
                 
             Discord.token = defaults.string(forKey: "token")
                 
-            print(Discord.token)
+            print(Discord.token ?? "")
                 
             loadServers()
 
@@ -203,10 +206,13 @@ class ServerController: WKInterfaceController {
                         Discord.getUser(completion: { user in
 
                             Discord.getServerMember(server: server, user: user, completion: { member in
+                                
+                                //Discord.getServerMembers(server: server, completion: { members in
                                     
                                 var _server = server
                                 _server.addChannels(channels: channels)
                                 _server.addUser(user: member)
+                                //_server.addMembers(members: members)
                                     
                                 row?.server = _server
                                 
@@ -216,6 +222,8 @@ class ServerController: WKInterfaceController {
                                     self.ai?.setHidden(true)
                                     
                                 }
+                                    
+                            //})
                                 
                             })
                         })
