@@ -9,7 +9,7 @@
 import Foundation
 import Network
 
-var webSocketConnection: WebSocketTaskConnection!
+var webSocketConnection: WebSocketTaskConnection?
 var user: User?
 var seq: Int?
 var session_id: String?
@@ -36,7 +36,7 @@ protocol WebSocketConnectionDelegate {
 
 class WebSocketTaskConnection: NSObject, WebSocketConnection {
     var delegate: WebSocketConnectionDelegate?
-    var websocketConnection: NWConnection!
+    var websocketConnection: NWConnection?
     let delegateQueue = OperationQueue()
 
     init(url: URL) {
@@ -96,11 +96,11 @@ class WebSocketTaskConnection: NSObject, WebSocketConnection {
     }
 
     func disconnect() {
-        websocketConnection.cancel()
+        websocketConnection?.cancel()
     }
 
     func listen()  {
-        websocketConnection.receiveMessage { data, context, complete, error  in
+        websocketConnection?.receiveMessage { data, context, complete, error  in
 
             if let data = data {
 

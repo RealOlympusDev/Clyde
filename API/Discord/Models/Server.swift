@@ -40,7 +40,8 @@ public struct Server: Codable {
     var banner: String?
     var premium_tier: Int?
     var preferred_locale: String?
-    var user: ServerMember?
+    var user: User?
+    var member: ServerMember?
  
     func getRole(id: String) -> Role {
         return roles?.first(where: {$0.id == id}) ?? Role()
@@ -50,8 +51,12 @@ public struct Server: Codable {
         self.channels = channels
     }
     
-    mutating func addUser(user: ServerMember){
+    mutating func addUser(user: User){
         self.user = user
+    }
+    
+    mutating func addRoles(roles: [Role]){
+        self.roles = roles
     }
     
     mutating func addMembers(members: [ServerMember]){

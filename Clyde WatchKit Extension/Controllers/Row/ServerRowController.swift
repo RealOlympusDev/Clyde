@@ -11,38 +11,45 @@ import WatchKit
 class ServerRowController: NSObject {
     
     @IBOutlet weak var icon: WKInterfaceImage?
-    @IBOutlet weak var label: WKInterfaceLabel!
+    @IBOutlet weak var label: WKInterfaceLabel?
+    @IBOutlet weak var server_name: WKInterfaceLabel?
     
      var server: Server? {
         
         didSet {
             
-            guard let server = server else { return }
+            DispatchQueue.global().async {
+            
+            guard let server = self.server else { return }
+            
+            guard let name = server.name else { return }
+            
+            self.server_name?.setText(name)
             
             if let icon = server.icon {
             
             let icon_url = "https://cdn.discordapp.com/icons/" + (server.id ?? "") + "/"
         
-            let icon_image = icon_url + icon + ".png?size=128"
+            let icon_image = icon_url + icon + ".png?size=64"
             
             print(icon_image)
         
-            imageFromUrl(icon_image)
+            self.imageFromUrl(icon_image)
                 
             } else {
-                
-                guard let name = server.name else { return }
                 
                 let nameArr = name.components(separatedBy: " ")
                 var title = ""
 
                 for string in nameArr {
-                    title = title + String(string.first!)
+                    title = title + String(string.first ?? Character(""))
                 }
                 
-                label.setText(title)
+                self.label?.setText(title)
                 
             }
+            
+        }
             
         }
         
@@ -51,20 +58,20 @@ class ServerRowController: NSObject {
     
     public func imageFromUrl(_ urlString: String){
         
-        if let url = URL(string: urlString) {
+        if let url = NSURL(string: urlString) {
             
-            let request = URLRequest(url: url)
+            let request = NSURLRequest(url: url as URL)
             let config = URLSessionConfiguration.default
             let session = URLSession(configuration: config)
             
-            let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
+            let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, response, error) in
                 
                 if let imageData = data as Data? {
                     
-                    DispatchQueue.global().async {
+                    DispatchQueue(label: "image").async {
                         self.icon?.setImageData(imageData)
-                        
                     }
+
                 }
             });
             

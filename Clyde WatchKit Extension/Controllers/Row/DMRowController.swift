@@ -23,20 +23,75 @@ class DMRowController: NSObject {
             
             guard let recipients = channel.recipients else { return }
             
+            
+            if channel.type == 3 {
+                
+                var name = ""
+                
+                if let _name = channel.name {
+                    
+                    name = _name
+                    
+                } else {
+                
+                    for recipient in recipients.sorted(by: { ($0.username ?? "") > ($1.username ?? "")} ) {
+                    
+                    if name == "" {
+                        name = recipient.username ?? ""
+                    } else {
+                    
+                        name += ", " + (recipient.username ?? "")
+                        
+                    }
+                    
+                }
+                    
+                }
+                
+                if let icon = channel.icon {
+                    
+                    
+                    let image_url = "https://cdn.discordapp.com/channel-icons/" + (channel.id ?? "") + "/"
+                    let image_profile = image_url + icon + ".png?size=64"
+                            
+                    if let profile_pic = profile_pic {
+                    
+                        self.imageFromUrl(image_profile, image: profile_pic)
+                        
+                    }
+                    
+                }
+                    
+                self.name?.setText(name)
+                    
+                
+                
+                
+            } else {
+            
             self.name?.setText(recipients.first?.username)
             
-            guard let recipient = recipients.first?.id else { return }
+            if let recipient = recipients.first?.id {
             
-            
-            guard let avatar = recipients.first?.avatar else { return }
+            if let avatar = recipients.first?.avatar {
             
             let image_url = "https://cdn.discordapp.com/avatars/" + recipient + "/"
-            let image_profile = image_url + avatar + ".png"
+            let image_profile = image_url + avatar + ".png?size=64"
+                    
+            if let profile_pic = profile_pic {
             
-            imageFromUrl(image_profile, image: profile_pic!)
+                self.imageFromUrl(image_profile, image: profile_pic)
+                
+            }
+                
+            }
+                
+            }
+                
+            }
             
         }
-        
+            
         
     }
     

@@ -47,7 +47,7 @@ class MessageRowController: NSObject {
             
             let member = message?.member
 
-            var color = message?.server?.roles?.sorted(by: {$0.position! > $1.position!}).first(where: {(member?.roles?.contains($0.id) ?? false)})?.color ?? 0xFFFFFF
+            var color = message?.server?.roles?.sorted(by: {$0.position ?? 0 > $1.position ?? 0}).first(where: {(member?.roles?.contains($0.id) ?? false)})?.color ?? 0xFFFFFF
             
             if color == 0 {
                 color = 0xFFFFFF
@@ -110,13 +110,13 @@ class MessageRowController: NSObject {
             }
             
             
-            let regex1 = try! NSRegularExpression(pattern: "<(:[a-zA-z0-9_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
+            let regex1 = try? NSRegularExpression(pattern: "<(:[a-zA-z0-9_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
             let range1 = NSMakeRange(0, text.count)
-            text = regex1.stringByReplacingMatches(in: text, options: [], range: range1, withTemplate: "$1")
+            text = regex1?.stringByReplacingMatches(in: text, options: [], range: range1, withTemplate: "$1") ?? text
             
-            let regex2 = try! NSRegularExpression(pattern: "<a(:[a-zA-z0-9_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
+            let regex2 = try? NSRegularExpression(pattern: "<a(:[a-zA-z0-9_]+:)[0-9]+>", options: NSRegularExpression.Options.caseInsensitive)
             let range2 = NSMakeRange(0, text.count)
-            text = regex2.stringByReplacingMatches(in: text, options: [], range: range2, withTemplate: "$1")
+            text = regex2?.stringByReplacingMatches(in: text, options: [], range: range2, withTemplate: "$1") ?? text
             
             
             
@@ -171,17 +171,20 @@ class MessageRowController: NSObject {
             } else if(message?.type == MessageTypes.RECIPIENT_ADD){
                 top_group?.setHidden(true)
             
-                text = "→ " + (message?.author?.username ?? "") + " added someone to the group."
+                text = "→ " + (message?.author?.username ?? "") + " added "
+                text += (message?.mentions?.first??.username ?? "") + " to the group."
                 
             } else if(message?.type == MessageTypes.RECIPIENT_REMOVE){
                 top_group?.setHidden(true)
             
-                text = "→ " + (message?.author?.username ?? "") + " removed someone from the group."
+                text = "→ " + (message?.author?.username ?? "") + " removed "
+                text += (message?.mentions?.first??.username ?? "") + " from the group."
                 
             } else if(message?.type == MessageTypes.CHANNEL_NAME_CHANGE){
                 top_group?.setHidden(true)
            
-                text = "→ " + (message?.author?.username ?? "") + " changed the channel name."
+                text = "→ " + (message?.author?.username ?? "") + " changed the channel name: "
+                text += (message?.channel?.name ?? "")
                
             } else if(message?.type == MessageTypes.CHANNEL_ICON_CHANGE){
                 top_group?.setHidden(true)
@@ -204,7 +207,6 @@ class MessageRowController: NSObject {
                 
             guard let parse = markdownParser.parse(text) as? NSMutableAttributedString else { return }
             
-                
             guard let range = (parse.string as NSString?)?.range(of: " (edited)") else { return }
             
             if(message?.type != MessageTypes.DEFAULT){
@@ -216,10 +218,17 @@ class MessageRowController: NSObject {
                 parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(rgb: 0x43B581), NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)], range: range)
                 
                 
-                
                 guard let range2 = (parse.string as NSString?)?.range(of: message?.author?.username ?? "") else { return }
                     
                 parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], range: range2)
+                
+                 guard let range3 = (parse.string as NSString?)?.range(of: message?.mentions?.first??.username ?? "") else { return }
+                
+                parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], range: range3)
+                
+                guard let range4 = (parse.string as NSString?)?.range(of: message?.channel?.name ?? "") else { return }
+                    
+                parse.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)], range: range4)
                 
             }
                 

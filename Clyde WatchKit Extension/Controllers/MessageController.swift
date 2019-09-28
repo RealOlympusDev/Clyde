@@ -12,6 +12,15 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
     
     func onConnected(connection: WebSocketConnection) {
         print("Connected to Message")
+        
+//        let json: [String : Any] = [
+//                   "op": 12,
+//                   "d": [server?.id ?? ""]
+//            ]
+//
+//        guard let data = (try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)) else { return }
+//
+//        connection.send(data: data)
     }
     
     func onDisconnected(connection: WebSocketConnection, error: Error?) {
@@ -223,26 +232,29 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
 
                                            if typing.channel_id == self.channel?.id {
                                                
-                                               let user = self.channel?.server?.members?.first(where: {$0.user?.id == typing.user_id})
                                                
-                                               
-                                               let message = (user?.user?.username ?? "Someone") + " is typing..."
-                                               
-                                               
-                                                self.message.setTitle(message)
-                                            
-                                            DispatchQueue.global().asyncAfter(deadline: .now() + TimeInterval(5)) {
+                                            Discord.getServerMember(server: self.channel?.server ?? Server(), user: User(id: typing.user_id ?? ""), completion: { member in
                                                 
-                                                if let name = self.channel?.name {
+                                                let message = (member.user?.username ?? "Someone") + " is typing..."
+                                                   
+                                                   
+                                                    self.message?.setTitle(message)
+                                                
+                                                DispatchQueue.global().asyncAfter(deadline: .now() + TimeInterval(5)) {
                                                     
-                                                    self.message.setTitle("Message #" + name)
+                                                    if let name = self.channel?.name {
+                                                        
+                                                        self.message?.setTitle("Message #" + name)
+                                                        
+                                                    } else {
+                                                        self.message?.setTitle("Message @" + (self.channel?.recipients?.first?.username ?? ""))
+                                                    }
                                                     
-                                                } else {
-                                                    self.message.setTitle("Message @" + (self.channel?.recipients?.first?.username ?? ""))
                                                 }
                                                 
-                                            }
-                                            
+                                                
+                                                
+                                            })
                                                 
                                             
                                            }
@@ -262,7 +274,7 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
 
     var channel: Channel?
 
-    @IBOutlet weak var message: WKInterfaceButton!
+    @IBOutlet weak var message: WKInterfaceButton?
     
     var lastMessage: Message?
 
@@ -279,6 +291,8 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         group?.setHidden(true)
         ai?.setHidden(false)
     }
+    
+    var server: Server?
 
     override func awake(withContext context: Any?) {
         
@@ -288,9 +302,19 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         
         self.channel = channel
         
+        server = channel.server
+        
         if let name = channel.name {
             
-            self.setTitle("#" + name)
+            if channel.type == 3 {
+            
+                self.setTitle(name)
+                
+            } else {
+                
+                self.setTitle("#" + name)
+                
+            }
             
         } else {
             self.setTitle("@" + (channel.recipients?.first?.username ?? ""))
@@ -299,11 +323,25 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         
         if let name = channel.name {
             
-            self.message?.setTitle("Message #" + name)
+            if channel.type == 3 {
+            
+                self.message?.setTitle("Message " + name)
+                
+            } else {
+                
+                self.message?.setTitle("Message #" + name)
+                
+            }
             
         } else {
             self.message?.setTitle("Message @" + (channel.recipients?.first?.username ?? ""))
         }
+        
+        if (compute_permissions(member: server?.member ?? ServerMember(), channel: channel) & PermissionType.SEND_MESSAGES) != PermissionType.SEND_MESSAGES {
+            self.message?.setTitle("You can't send messages here!")
+            self.message?.setEnabled(false)
+        }
+        
         
         Discord.getMessages(channel: channel, completion: { messages in
             
@@ -373,8 +411,10 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
     
     
      func start_websocket(){
+        
+        guard let url = URL(string: "wss://gateway.discord.gg/?encoding=json&v=6") else { return }
 
-        let websocket = WebSocketTaskConnection(url: URL(string: "wss://gateway.discord.gg/?encoding=json&v=6")!)
+        let websocket = WebSocketTaskConnection(url: url)
         
         websocket.connect()
         
@@ -410,7 +450,7 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
                       
         guard let responses = results else { return }
                       
-        let text = responses[0] as? String
+        var text = responses[0] as? String
         
         guard let channel = self.channel else { return }
         
@@ -418,7 +458,17 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         
         let message = WKAlertAction(title: "Message", style: .default) {
             
+            
+            
+            for channel in channel.server?.channels ?? [] {
+                
+                text = text?.replacingOccurrences(of: "#" + (channel.name ?? ""), with: "<#" + (channel.id ?? "") + ">")
+                
+            }
+            
+            
             Discord.sendMessage(channel: channel, message: text ?? "", completion: { message in
+                
                 
             })
             

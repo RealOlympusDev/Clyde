@@ -22,8 +22,10 @@ public class Discord {
                   "code": code,
                   "ticket": Discord.ticket ?? ""
               ]
+        
+            guard let url = URL(string: "https://discordapp.com/api/v6/auth/mfa/totp") else { return }
               
-              var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/auth/mfa/totp")!)
+              var request = URLRequest(url: url)
               request.httpMethod = "POST"
               request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
               request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -65,7 +67,9 @@ public class Discord {
         
         
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/auth/login")!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/auth/login") else { return }
+        
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -142,7 +146,9 @@ public class Discord {
         
         guard let id = channel.id else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/channels/" + id + "/typing")!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/channels/" + id + "/typing") else { return }
+        
+        var request = URLRequest(url: url)
         
         request.httpMethod = "POST"
         
@@ -172,9 +178,11 @@ public class Discord {
         
         guard let id = channel.id else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/channels/" + id + "/messages")!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/channels/" + id + "/messages") else { return }
+        
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.setValue(token, forHTTPHeaderField: "Authorization")
@@ -206,7 +214,9 @@ public class Discord {
         
         guard let token = Discord.token else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/users/@me/channels")!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/users/@me/channels") else { return }
+        
+        var request = URLRequest(url: url)
         
         request.setValue(token, forHTTPHeaderField: "Authorization")
         
@@ -219,7 +229,6 @@ public class Discord {
             let decoder = JSONDecoder()
             
             do {
-                print(String(data: json, encoding: .utf8)!)
                 
                 let channel = try decoder.decode([Channel].self, from: json)
                 
@@ -242,7 +251,9 @@ public class Discord {
         
         guard let token = Discord.token else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/guilds/" + (server.id ?? "") + "/members?limit=" + String(limit))!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/guilds/" + (server.id ?? "") + "/members?limit=" + String(limit)) else { return }
+        
+        var request = URLRequest(url: url)
         
         request.setValue(token, forHTTPHeaderField: "Authorization")
         
@@ -276,7 +287,9 @@ public class Discord {
         
         guard let token = Discord.token else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/guilds/" + (server.id ?? "") + "/members/" + (user.id ?? ""))!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/guilds/" + (server.id ?? "") + "/members/" + (user.id ?? "")) else { return }
+        
+        var request = URLRequest(url: url)
         
         request.setValue(token, forHTTPHeaderField: "Authorization")
         
@@ -310,7 +323,9 @@ public class Discord {
         
         guard let token = Discord.token else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/users/@me")!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/users/@me") else { return }
+        
+        var request = URLRequest(url: url)
         
         request.setValue(token, forHTTPHeaderField: "Authorization")
         
@@ -340,11 +355,51 @@ public class Discord {
         
     }
     
+    public static func getRoles(server: Server, completion: @escaping ([Role]) -> ()){
+        
+        guard let token = Discord.token else { return }
+        
+        guard let url = URL(string: "https://discordapp.com/api/v6/guilds/" + (server.id ?? "") + "/roles") else { return }
+        
+        var request = URLRequest(url: url)
+        
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        
+        let session = URLSession(configuration: .default)
+        
+        let task = session.dataTask(with: request, completionHandler: { result, response , error  in
+            
+            guard let json = result else { return }
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                
+                let server = try decoder.decode([Role].self, from: json)
+                
+                completion(server)
+                
+            } catch {
+                
+                
+                
+            }
+            
+            
+        })
+        
+        task.resume()
+        
+        
+    }
+    
     public static func getServer(server: Server, completion: @escaping (Server) -> ()){
         
         guard let token = Discord.token else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/guilds/" + (server.id ?? ""))!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/guilds/" + (server.id ?? "")) else { return }
+        
+        var request = URLRequest(url: url)
         
         request.setValue(token, forHTTPHeaderField: "Authorization")
         
@@ -381,7 +436,9 @@ public class Discord {
         
         guard let token = Discord.token else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/users/@me/guilds")!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/users/@me/guilds") else { return }
+        
+        var request = URLRequest(url: url)
         
         request.setValue(token, forHTTPHeaderField: "Authorization")
         
@@ -400,7 +457,13 @@ public class Discord {
                 completion(server)
 
             } catch {
+                
+                if(String(data: json, encoding: .utf8)?.contains("401") ?? false){
+                    errorHandler("401")
+                }
+                
                 errorHandler(error.localizedDescription)
+                
             }
             
             
@@ -416,7 +479,9 @@ public class Discord {
         
         guard let token = Discord.token else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/guilds/" + (server.id ?? "") + "/channels")!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/guilds/" + (server.id ?? "") + "/channels") else { return }
+        
+        var request = URLRequest(url: url)
         
         request.setValue(token, forHTTPHeaderField: "Authorization")
         
@@ -452,7 +517,9 @@ public class Discord {
 
         guard let id = channel.id else { return }
         
-        var request = URLRequest(url: URL(string: "https://discordapp.com/api/v6/channels/" + id + "/messages?limit=" + String(limit))!)
+        guard let url = URL(string: "https://discordapp.com/api/v6/channels/" + id + "/messages?limit=" + String(limit)) else { return }
+        
+        var request = URLRequest(url: url)
         
         request.setValue(token, forHTTPHeaderField: "Authorization")
         
@@ -461,8 +528,6 @@ public class Discord {
         let task = session.dataTask(with: request, completionHandler: { result, response , error  in
             
             guard let json = result else { return }
-            
-            print(String(data: json, encoding: .utf8)!)
             
             let decoder = JSONDecoder()
 

@@ -8,6 +8,81 @@
 
 import WatchKit
 
+func compute_base_permissions(member: ServerMember, guild: Server) -> Int {
+       if(guild.owner ?? false){
+           return PermissionType.ALL
+       }
+
+       let role_everyone = guild.getRole(id: guild.id ?? "")
+       
+       var permissions = role_everyone.permissions ?? PermissionType.VIEW_CHANNEL
+
+       for role in member.roles ?? [] {
+           
+           permissions |= guild.roles?.first(where: { $0.id == role})?.permissions ?? PermissionType.NONE
+           
+       }
+
+       if permissions & PermissionType.ADMINISTRATOR == PermissionType.ADMINISTRATOR {
+           return PermissionType.ALL
+       }
+
+       return permissions
+       
+   }
+   
+   func compute_overwrites(base_permissions: Int, member: ServerMember, channel: Channel) -> Int{
+       // ADMINISTRATOR overrides any potential permission overwrites, so there is nothing to do here.
+       if base_permissions & PermissionType.ADMINISTRATOR == PermissionType.ADMINISTRATOR {
+           return PermissionType.ALL
+       }
+
+       var permissions = base_permissions
+       
+       if let overwrite_everyone = channel.permission_overwrites?.first(where: { $0?.id == channel.server?.id}) {
+
+           permissions &= ~(overwrite_everyone?.deny ?? 0)
+           permissions |= overwrite_everyone?.allow ?? 0
+       
+       }
+
+       // Apply role specific overwrites.
+       
+       let overwrites = channel.permission_overwrites
+       var allow = PermissionType.NONE
+       var deny = PermissionType.NONE
+       
+       for role_id in member.roles ?? [] {
+           if let overwrite_role = overwrites?.first(where: { $0?.id == role_id}) {
+               allow |= overwrite_role?.allow ?? 0
+               deny |= overwrite_role?.deny ?? 0
+           }
+           
+       }
+
+       permissions &= ~deny
+       permissions |= allow
+
+       // Apply member specific overwrite if it exist.
+       
+       if let overwrite_member = overwrites?.first(where: { $0?.id == member.user?.id} ) {
+           permissions &= ~(overwrite_member?.deny ?? 0)
+           permissions |= overwrite_member?.allow ?? 0
+       }
+       
+       return permissions
+       
+   }
+   
+   func compute_permissions(member: ServerMember, channel: Channel) -> Int {
+       
+       let base_permissions = compute_base_permissions(member: member, guild: channel.server ?? Server())
+       
+       return compute_overwrites(base_permissions: base_permissions, member: member, channel: channel)
+       
+       
+   }
+
 class ChannelController: WKInterfaceController {
     
     @IBOutlet weak var table: WKInterfaceTable?
@@ -38,88 +113,26 @@ class ChannelController: WKInterfaceController {
         
     }
     
-    func compute_base_permissions(member: ServerMember, guild: Server) -> Int {
-        if(guild.owner ?? false){
-            return PermissionType.ALL
-        }
-
-        let role_everyone = guild.getRole(id: guild.id!)
-        
-        var permissions = role_everyone.permissions ?? PermissionType.VIEW_CHANNEL
-
-        for role in member.roles ?? [] {
-            
-            permissions |= guild.roles?.first(where: { $0.id == role})?.permissions ?? PermissionType.NONE
-            
-        }
-
-        if permissions & PermissionType.ADMINISTRATOR == PermissionType.ADMINISTRATOR {
-            return PermissionType.ALL
-        }
-
-        return permissions
-        
-    }
-    
-    func compute_overwrites(base_permissions: Int, member: ServerMember, channel: Channel) -> Int{
-        // ADMINISTRATOR overrides any potential permission overwrites, so there is nothing to do here.
-        if base_permissions & PermissionType.ADMINISTRATOR == PermissionType.ADMINISTRATOR {
-            return PermissionType.ALL
-        }
-
-        var permissions = base_permissions
-        
-        if let overwrite_everyone = channel.permission_overwrites?.first(where: { $0?.id == channel.server?.id}) {
-
-            permissions &= ~overwrite_everyone!.deny!
-            permissions |= overwrite_everyone!.allow!
-        
-        } 
-
-        // Apply role specific overwrites.
-        
-        let overwrites = channel.permission_overwrites
-        var allow = PermissionType.NONE
-        var deny = PermissionType.NONE
-        
-        for role_id in member.roles ?? [] {
-            if let overwrite_role = overwrites?.first(where: { $0?.id == role_id}) {
-                allow |= overwrite_role?.allow ?? 0
-                deny |= overwrite_role?.deny ?? 0
-            }
-            
-        }
-
-        permissions &= ~deny
-        permissions |= allow
-
-        // Apply member specific overwrite if it exist.
-        
-        if let overwrite_member = overwrites?.first(where: { $0?.id == member.user?.id} ) {
-            permissions &= ~overwrite_member!.deny!
-            permissions |= overwrite_member?.allow ?? 0
-        }
-        
-        return permissions
-        
-    }
-    
-    func compute_permissions(member: ServerMember, channel: Channel) -> Int {
-        
-        let base_permissions = compute_base_permissions(member: member, guild: channel.server ?? Server())
-        
-        return compute_overwrites(base_permissions: base_permissions, member: member, channel: channel)
-        
-        
-    }
     
     override func awake(withContext context: Any?) {
         
         hide()
         
         if let server = context as? Server {
+            
+            Discord.getChannels(server: server, completion: { _channels in
+            
+                Discord.getServerMember(server: server, user: server.user ?? User(), completion: { member in
+                    
+                Discord.getServer(server: server, completion: { server in
+                    
                 
-            var channels = server.channels ?? []
+            var channels = _channels
+                    
+            var server = server
+                    
+            server.channels = channels
+            server.member = member
             
             print(channels)
                 
@@ -134,7 +147,7 @@ class ChannelController: WKInterfaceController {
             
 
 
-            channels = channels.sorted(by: { $0.position ?? 0 < $1.position ?? 0 }).filter({$0.type == 0 && (self.compute_permissions(member: server.user ?? ServerMember(), channel: $0) & PermissionType.VIEW_CHANNEL) == PermissionType.VIEW_CHANNEL})
+                    channels = channels.sorted(by: { $0.position ?? 0 < $1.position ?? 0 }).filter({$0.type == 0 && (compute_permissions(member: member, channel: $0) & PermissionType.VIEW_CHANNEL) == PermissionType.VIEW_CHANNEL})
 
                 
                     self.channels = channels
@@ -158,7 +171,9 @@ class ChannelController: WKInterfaceController {
                     self.show()
 
             
-                            
+            })
+            })
+            })
                 
         }
         

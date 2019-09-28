@@ -9,6 +9,15 @@
 import Foundation
 
 public struct User: Codable {
+    
+    init(){
+        
+    }
+    
+    init(id: String){
+        self.id = id
+    }
+    
     var username: String?
     var discriminator: String?
     var bot: Bool?

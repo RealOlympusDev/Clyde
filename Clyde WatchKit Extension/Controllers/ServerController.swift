@@ -17,7 +17,7 @@ class CodeController: WKInterfaceController {
         
         if code != "" {
             
-            Discord.mfa(code: code!, completion: { token in
+            Discord.mfa(code: code ?? "", completion: { token in
                  
                 let defaults = UserDefaults.standard
                  
@@ -125,96 +125,56 @@ class ServerController: WKInterfaceController {
         
     }
     
-    var loadedServers = false
+    
+
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        loadedServers = false
-        
-        
-    }
-    
-    @IBAction func logout() {
-        
-        let defaults = UserDefaults.standard
-        defaults.set(nil, forKey: "token")
-        
-        Discord.token = nil
-        
-        loadedServers = false
-        
-        self.table?.setHidden(true)
-        self.ai?.setHidden(false)
-        
-        didAppear()
-        
-    }
-
-
-    
-    override func didAppear() {
-        super.didAppear()
-        
         // Configure interface objects here.
         
         let defaults = UserDefaults.standard
-        
-        if defaults.string(forKey: "token") == nil {
-            
-            self.presentController(withName: "Login", context: nil)
-            
-        } else {
-            
-            if loadedServers == false {
                 
-            table?.setHidden(true)
+        table?.setHidden(true)
                 
-            loadedServers = true
+        Discord.token = defaults.string(forKey: "token")
                 
-            Discord.token = defaults.string(forKey: "token")
-                
-            print(Discord.token ?? "")
-                
-            loadServers()
-
-                
-            }
-                
-        }
-        
+        loadServers()
     }
+        
     
         func loadServers(){
             
         Discord.getServers(completion: { servers in
+        
+        Discord.getUser(completion: { user in
+           
             
-            let servers = servers.sorted(by: {($0.id ?? "") > ($1.id ?? "")})
-            
+            let servers = servers.sorted(by: { ($0.name ?? "") < ($1.name ?? "") })
+                
             self.table?.setNumberOfRows(servers.count, withRowType: "ServerRow")
-            
-            let last = (self.table?.numberOfRows ?? 0) - 1
             
             for index in 0..<(self.table?.numberOfRows ?? 0) {
                 
-                Discord.getServer(server: servers[index], completion: { server in
-                    
-                    Discord.getChannels(server: server, completion: { channels in
-                        
-                        let row = self.table?.rowController(at: index) as? ServerRowController //get the row
-                        
-                        Discord.getUser(completion: { user in
+                //Discord.getRoles(server: servers[index], completion: { roles in
 
-                            Discord.getServerMember(server: server, user: user, completion: { member in
+                    //Discord.getChannels(server: servers[index], completion: { channels in
+
+//                            Discord.getServerMember(server: servers[index], user: user, completion: { member in
                                 
                                 //Discord.getServerMembers(server: server, completion: { members in
+                                
+                                let row = self.table?.rowController(at: index) as? ServerRowController //get the row
                                     
-                                var _server = server
-                                _server.addChannels(channels: channels)
-                                _server.addUser(user: member)
+                                var _server = servers[index]
+                                //_server.addChannels(channels: channels)
+                                _server.addUser(user: user)
+                                //_server.addRoles(roles: roles)
                                 //_server.addMembers(members: members)
                                     
                                 row?.server = _server
+                                
+                                let last = (self.table?.numberOfRows ?? 0) - 1
                                 
                                 if index == last {
                                 
@@ -225,19 +185,30 @@ class ServerController: WKInterfaceController {
                                     
                             //})
                                 
-                            })
-                        })
+                            //})
+//                        })
                         
-                    })
+                    //})
                     
                     
                     
-                })
+                }
+            
+            })
                 
-                
-            }
             
         }, errorHandler: { error in
+            
+            if error.contains("401") {
+                
+                let defaults = UserDefaults.standard
+                defaults.set(nil, forKey: "token")
+                
+                Discord.token = nil
+                
+                self.popToRootController()
+                
+            }
             
             self.presentAlert(withTitle: "Oops", message: error, preferredStyle: .alert, actions: [WKAlertAction(title: "Ok", style: .default, handler: {
                 

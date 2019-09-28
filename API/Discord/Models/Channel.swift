@@ -22,6 +22,7 @@ public struct Channel: Codable {
     var type: Int?
     var id: String?
     var recipients: [User]?
+    var icon: String?
     
     var server: Server?
     

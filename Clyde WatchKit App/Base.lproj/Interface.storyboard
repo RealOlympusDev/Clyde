@@ -1,37 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14868" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KxN-oi-agB">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14868" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jaC-U0-ySR">
     <device id="watch44"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14643"/>
     </dependencies>
     <scenes>
+        <!--Clyde-->
+        <scene sceneID="4OB-oE-TMg">
+            <objects>
+                <controller title="Clyde" id="jaC-U0-ySR" customClass="ClydeController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <button alignment="left" id="key-Q9-802">
+                            <group key="contentGroup" width="1" height="60" alignment="left" id="S7I-zQ-bo1">
+                                <items>
+                                    <imageView width="40" height="40" alignment="left" verticalAlignment="center" image="square.stack.3d.down.right.fill" catalog="system" contentMode="scaleAspectFit" id="BQi-wx-APt">
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <group alignment="left" verticalAlignment="center" id="ThG-co-kqg">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="Servers" id="cz9-ud-k0I">
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                            </label>
+                                        </items>
+                                        <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                                    </group>
+                                </items>
+                                <color key="backgroundColor" red="0.13355588909999999" green="0.13358157870000001" blue="0.13850545880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <edgeInsets key="margins" left="10" right="0.0" top="0.0" bottom="0.0"/>
+                                <variation key="device=watch38mm">
+                                    <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                                </variation>
+                            </group>
+                            <connections>
+                                <action selector="servers" destination="jaC-U0-ySR" id="tPe-6b-Nev"/>
+                            </connections>
+                        </button>
+                        <button alignment="left" id="Fsk-Il-0u8">
+                            <group key="contentGroup" width="1" height="60" alignment="left" id="ze8-oq-SqM">
+                                <items>
+                                    <imageView width="40" height="40" alignment="left" verticalAlignment="center" image="envelope.fill" catalog="system" contentMode="scaleAspectFit" id="lRF-bz-wgi">
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <group alignment="left" verticalAlignment="center" id="3GL-E9-MMs">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="Messages" id="3Ye-Zv-KgD">
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                            </label>
+                                        </items>
+                                        <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                                    </group>
+                                </items>
+                                <color key="backgroundColor" red="0.13355588909999999" green="0.13358157870000001" blue="0.13850545880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <edgeInsets key="margins" left="10" right="0.0" top="0.0" bottom="0.0"/>
+                                <variation key="device=watch38mm">
+                                    <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                                </variation>
+                            </group>
+                            <connections>
+                                <action selector="messages" destination="jaC-U0-ySR" id="LcV-IY-k2X"/>
+                            </connections>
+                        </button>
+                        <button alignment="left" id="EhH-vl-hN8">
+                            <group key="contentGroup" width="1" height="60" alignment="left" id="tyP-F8-jmZ">
+                                <items>
+                                    <imageView width="40" height="40" alignment="left" verticalAlignment="center" image="gear" catalog="system" contentMode="scaleAspectFit" id="V0x-ro-Rne">
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <group alignment="left" verticalAlignment="center" id="cIU-V4-qo3">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="Settings" id="VkF-wT-w9s">
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                            </label>
+                                        </items>
+                                        <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                                    </group>
+                                </items>
+                                <color key="backgroundColor" red="0.13355588909999999" green="0.13358157870000001" blue="0.13850545880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <edgeInsets key="margins" left="10" right="0.0" top="0.0" bottom="0.0"/>
+                                <variation key="device=watch38mm">
+                                    <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                                </variation>
+                            </group>
+                            <connections>
+                                <action selector="settings" destination="jaC-U0-ySR" id="jWs-77-q9o"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="Messages" destination="ze8-oq-SqM" id="rPy-Qa-joH"/>
+                        <outlet property="messages" destination="VkF-wT-w9s" id="W9s-aD-HFv"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-657.08695652173913" y="359.73214285714289"/>
+        </scene>
         <!--Servers-->
         <scene sceneID="5S1-Bk-tax">
             <objects>
-                <controller title="Servers" id="KxN-oi-agB" customClass="ServerController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                <controller identifier="Servers" title="Servers" id="KxN-oi-agB" customClass="ServerController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
                     <items>
                         <table alignment="left" id="uny-0b-Gsq">
                             <items>
                                 <tableRow identifier="ServerRow" id="mAa-a7-CF7" customClass="ServerRowController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" contentMode="scaleAspectFill" layout="overlap" id="DE5-RW-JXK">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" contentMode="scaleAspectFill" radius="6" id="DE5-RW-JXK">
                                         <items>
-                                            <group alignment="center" verticalAlignment="center" radius="60" id="gQv-Tb-R0i">
+                                            <group alignment="left" layout="overlap" id="9Ho-dq-GYC">
                                                 <items>
-                                                    <imageView width="120" height="120" alignment="center" verticalAlignment="center" image="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" contentMode="scaleAspectFill" id="6LN-by-KdF"/>
+                                                    <group alignment="left" verticalAlignment="center" radius="20" id="gQv-Tb-R0i">
+                                                        <items>
+                                                            <imageView width="40" height="40" alignment="center" verticalAlignment="center" image="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" contentMode="scaleAspectFill" id="6LN-by-KdF"/>
+                                                        </items>
+                                                    </group>
+                                                    <label alignment="center" verticalAlignment="center" id="vvI-kw-56V">
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="font" type="system" pointSize="18"/>
+                                                    </label>
                                                 </items>
                                             </group>
-                                            <label alignment="center" verticalAlignment="center" id="vvI-kw-56V">
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="font" type="system" pointSize="50"/>
-                                            </label>
+                                            <group width="0.69999999999999996" alignment="left" verticalAlignment="center" id="zaa-Wf-bYl">
+                                                <items>
+                                                    <label alignment="left" verticalAlignment="center" text="Loading" textAlignment="left" numberOfLines="0" id="Bjy-kf-kUK">
+                                                        <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                                    </label>
+                                                </items>
+                                                <edgeInsets key="margins" left="10" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
                                         </items>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="10"/>
+                                        <edgeInsets key="margins" left="10" right="0.0" top="10" bottom="10"/>
                                     </group>
                                     <connections>
                                         <outlet property="icon" destination="6LN-by-KdF" id="WFN-W2-gya"/>
                                         <outlet property="label" destination="vvI-kw-56V" id="hgZ-UF-rPo"/>
+                                        <outlet property="server_name" destination="Bjy-kf-kUK" id="IzV-Vm-uc9"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -39,19 +143,9 @@
                         </table>
                         <imageView alignment="center" verticalAlignment="center" image="ai" id="3qa-GL-amm"/>
                     </items>
-                    <menu key="menu" id="fkH-XG-2ZH">
-                        <items>
-                            <menuItem title="Logout" image="logout" id="j0r-sU-Nmq">
-                                <connections>
-                                    <action selector="logout" destination="KxN-oi-agB" id="rqf-ZK-fjb"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="ai" destination="3qa-GL-amm" id="inu-TP-N5P"/>
                         <outlet property="table" destination="uny-0b-Gsq" id="SqZ-Ym-wEO"/>
-                        <segue destination="0BW-0f-B1k" kind="relationship" relationship="nextPage" id="hob-ua-DNW"/>
                     </connections>
                 </controller>
             </objects>
@@ -67,7 +161,7 @@
                                 <tableRow identifier="ChannelRow" id="Qpa-EM-kYa" customClass="ChannelRowController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="GX8-Kj-hKH">
                                         <items>
-                                            <label alignment="center" verticalAlignment="center" text="#test" textAlignment="center" numberOfLines="0" id="wbo-XS-oJf">
+                                            <label alignment="center" verticalAlignment="center" text="#channel" textAlignment="center" numberOfLines="0" id="wbo-XS-oJf">
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </label>
                                         </items>
@@ -89,6 +183,24 @@
             </objects>
             <point key="canvasLocation" x="-19" y="360"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="8qk-PC-Gj0">
+            <objects>
+                <controller identifier="Settings" title="Settings" id="KJd-ia-0wl" customClass="SettingsController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <button width="1" alignment="left" title="Logout" id="S49-Yv-Geu">
+                            <connections>
+                                <action selector="logout" destination="KJd-ia-0wl" id="Dbj-tg-rMP"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="logout" destination="S49-Yv-Geu" id="xSX-Ha-SiJ"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-635" y="655"/>
+        </scene>
         <!--Message-->
         <scene sceneID="jPk-gv-Q4Y">
             <objects>
@@ -105,7 +217,7 @@
                                                         <items>
                                                             <group alignment="left" radius="14" id="cOU-j9-ZgX">
                                                                 <items>
-                                                                    <imageView width="30" height="30" alignment="left" id="OAQ-aK-2Au"/>
+                                                                    <imageView width="30" height="30" alignment="left" image="Icon-24" id="OAQ-aK-2Au"/>
                                                                 </items>
                                                             </group>
                                                         </items>
@@ -214,15 +326,15 @@
                                 <tableRow identifier="DMRow" id="7qp-G4-gHQ" customClass="DMRowController" customModule="Clyde_WatchKit_App" customModuleProvider="target">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Fcw-ed-m7c">
                                         <items>
-                                            <group alignment="left" radius="20" id="mGp-Lh-5dy">
+                                            <group alignment="left" verticalAlignment="center" radius="20" id="mGp-Lh-5dy">
                                                 <items>
-                                                    <imageView width="40" height="40" alignment="left" image="Icon-24" id="F2k-PX-o7D"/>
+                                                    <imageView width="40" height="40" alignment="left" verticalAlignment="center" image="Icon-24" id="F2k-PX-o7D"/>
                                                 </items>
                                                 <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                             </group>
                                             <group width="0.69999999999999996" alignment="left" verticalAlignment="center" id="WBP-lG-R1E">
                                                 <items>
-                                                    <label alignment="left" verticalAlignment="center" text="name" textAlignment="center" numberOfLines="0" id="iFo-b1-PKP">
+                                                    <label alignment="left" verticalAlignment="center" text="Loading" textAlignment="left" numberOfLines="0" id="iFo-b1-PKP">
                                                         <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                                     </label>
                                                 </items>
@@ -278,7 +390,9 @@
     <resources>
         <image name="Icon-24" width="24" height="24"/>
         <image name="ai" width="16" height="16"/>
+        <image name="envelope.fill" catalog="system" width="64" height="46"/>
         <image name="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" width="150" height="150"/>
-        <image name="logout" width="35" height="35"/>
+        <image name="gear" catalog="system" width="64" height="60"/>
+        <image name="square.stack.3d.down.right.fill" catalog="system" width="62" height="64"/>
     </resources>
 </document>
