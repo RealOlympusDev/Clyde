@@ -525,6 +525,8 @@ public class Discord {
         
         let session = URLSession(configuration: .default)
         
+        print("started")
+        
         let task = session.dataTask(with: request, completionHandler: { result, response , error  in
             
             guard let json = result else { return }
@@ -532,7 +534,7 @@ public class Discord {
             let decoder = JSONDecoder()
 
             do {
-                let message = try decoder.decode([Message].self, from: json)
+                let message = try! decoder.decode([Message].self, from: json)
 
                 completion(message)
 
@@ -540,7 +542,7 @@ public class Discord {
 
                 do{
 
-                    let message = try decoder.decode(Message.self, from: json)
+                    let message = try! decoder.decode(Message.self, from: json)
 
                     completion([message])
 
@@ -550,6 +552,8 @@ public class Discord {
 
                 }
             }
+            
+            print(error?.localizedDescription)
             
             
         })

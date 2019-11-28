@@ -18,8 +18,6 @@ class ServerRowController: NSObject {
         
         didSet {
             
-            DispatchQueue.global().async {
-            
             guard let server = self.server else { return }
             
             guard let name = server.name else { return }
@@ -34,7 +32,7 @@ class ServerRowController: NSObject {
             
             print(icon_image)
         
-            self.imageFromUrl(icon_image)
+            imageFromUrl(icon_image)
                 
             } else {
                 
@@ -54,7 +52,6 @@ class ServerRowController: NSObject {
         }
         
         
-    }
     
     public func imageFromUrl(_ urlString: String){
         
@@ -76,8 +73,7 @@ class ServerRowController: NSObject {
             });
             
             task.resume()
-            
-        }
+    }
     }
 
 }

@@ -9,24 +9,52 @@
 import WatchKit
 
 class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
+    func onMessage(connection: WebSocketConnection, text: String) {
+        
+    }
+    
     
     func onConnected(connection: WebSocketConnection) {
         print("Connected to Message")
         
-//        let json: [String : Any] = [
+        let json: [String : Any] = [
+                  "op": 2,
+                  "d": [
+                      "token": Discord.token ?? "",
+                      "properties": [
+                          "os": "Linux",
+                          "browser": "Firefox",
+                          "device": "",
+                          "referrer": "",
+                          "referring_domain": ""
+                      ],
+                      "large_threshold": 100,
+                      "compress": true
+                  ]
+              ]
+              
+               guard let data = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) else { return }
+              
+              connection.send(data: data)
+        
+//        let json2: [String : Any] = [
 //                   "op": 12,
 //                   "d": [server?.id ?? ""]
 //            ]
 //
-//        guard let data = (try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)) else { return }
+//        guard let data2 = (try? JSONSerialization.data(withJSONObject: json2, options: .prettyPrinted)) else { return }
 //
-//        connection.send(data: data)
+//        connection.send(data: data2)
     }
     
     func onDisconnected(connection: WebSocketConnection, error: Error?) {
         print("Disconnected from Message")
         
-        pop()
+        DispatchQueue.main.async {
+            
+            self.pop()
+            
+        }
 
     }
     
@@ -36,7 +64,10 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
     
     func onMessage(connection: WebSocketConnection, data: Data) {
         
-                    
+//        let bytes = data.suffix(4)
+//        assert([UInt8](bytes as Data) == [UInt8(00), 00, 0xff, 0xff])
+
+        
         let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                     
         if let _seq = json?["s"] as? Int {
@@ -44,16 +75,16 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         }
         
         if let d = json?["d"] as? [String: Any] {
-            
+
             if let heartbeat_interval = d["heartbeat_interval"] as? Int {
-                
+
                 print(heartbeat_interval)
-                
+
                 connection.startTimer(heartbeat: heartbeat_interval)
-                
+
             }
-            
-            
+
+
         }
         
 
@@ -317,30 +348,83 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
             }
             
         } else {
-            self.setTitle("@" + (channel.recipients?.first?.username ?? ""))
+            
+            if channel.type == 3 {
+                
+                var name = ""
+                
+                for recipient in channel.recipients?.sorted(by: { ($0.username ?? "") < ($1.username ?? "")}) ?? [] {
+                                  
+                                  if name == "" {
+                                      name = recipient.username ?? ""
+                                  } else {
+                                  
+                                      name += ", " + (recipient.username ?? "")
+                                      
+                                  }
+                }
+                
+                self.setTitle(name)
+                                  
+                
+            } else {
+                
+                self.setTitle("@" + (channel.recipients?.first?.username ?? ""))
+                
+            }
             
         }
         
         if let name = channel.name {
             
             if channel.type == 3 {
+                
+
             
                 self.message?.setTitle("Message " + name)
+
                 
             } else {
                 
+                if (compute_permissions(member: server?.member ?? ServerMember(), channel: channel) & PermissionType.SEND_MESSAGES) != PermissionType.SEND_MESSAGES {
+                    
+                    self.message?.setTitle("You can't send messages here!")
+                    self.message?.setEnabled(false)
+                    
+                } else {
+                
                 self.message?.setTitle("Message #" + name)
+                    
+                }
                 
             }
             
         } else {
+            
+             if channel.type == 3 {
+            
+            var name = ""
+                          
+                for recipient in channel.recipients?.sorted(by: { ($0.username ?? "") < ($1.username ?? "")} ) ?? [] {
+                                            
+                if name == "" {
+                        name = recipient.username ?? ""
+                } else {
+                                            
+                        name += ", " + (recipient.username ?? "")
+                                                
+                }
+            }
+                
+            self.message?.setTitle("Message " + name)
+                
+             } else {
+            
             self.message?.setTitle("Message @" + (channel.recipients?.first?.username ?? ""))
+                
+            }
         }
         
-        if (compute_permissions(member: server?.member ?? ServerMember(), channel: channel) & PermissionType.SEND_MESSAGES) != PermissionType.SEND_MESSAGES {
-            self.message?.setTitle("You can't send messages here!")
-            self.message?.setEnabled(false)
-        }
         
         
         Discord.getMessages(channel: channel, completion: { messages in
@@ -412,6 +496,7 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
     
      func start_websocket(){
         
+        //guard let url = URL(string: "wss://gateway.discord.gg/?encoding=json&v=6&compress=zlib-stream") else { return }
         guard let url = URL(string: "wss://gateway.discord.gg/?encoding=json&v=6") else { return }
 
         let websocket = WebSocketTaskConnection(url: url)
@@ -420,25 +505,25 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         
         websocket.delegate = self
         
-        let json: [String : Any] = [
-            "op": 2,
-            "d": [
-                "token": Discord.token ?? "",
-                "properties": [
-                    "os": "Linux",
-                    "browser": "Firefox",
-                    "device": "",
-                    "referrer": "",
-                    "referring_domain": ""
-                ],
-                "large_threshold": 100,
-                "compress": true
-            ]
-        ]
-        
-         guard let data = (try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)) else { return }
-        
-        websocket.send(data: data)
+//        let json: [String : Any] = [
+//            "op": 2,
+//            "d": [
+//                "token": Discord.token ?? "",
+//                "properties": [
+//                    "os": "Linux",
+//                    "browser": "Firefox",
+//                    "device": "",
+//                    "referrer": "",
+//                    "referring_domain": ""
+//                ],
+//                "large_threshold": 100,
+//                "compress": true
+//            ]
+//        ]
+//
+//         guard let data = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) else { return }
+//
+//        websocket.send(data: data)
         
                 
     }
@@ -457,8 +542,6 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         Discord.sendStartTyping(channel: channel)
         
         let message = WKAlertAction(title: "Message", style: .default) {
-            
-            
             
             for channel in channel.server?.channels ?? [] {
                 

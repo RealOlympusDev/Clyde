@@ -39,7 +39,7 @@ public struct Message: Codable {
     var activity: [MessageActivity]?
     var application: [MessageApplication]?
     var message_reference: [MessageReference]?
-    var flags: [Int]?
+    var flags: Int?
     
     var code: Int?
     var message: String?

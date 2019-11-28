@@ -34,7 +34,7 @@ class DMRowController: NSObject {
                     
                 } else {
                 
-                    for recipient in recipients.sorted(by: { ($0.username ?? "") > ($1.username ?? "")} ) {
+                    for recipient in recipients.sorted(by: { ($0.username ?? "") < ($1.username ?? "")} ) {
                     
                     if name == "" {
                         name = recipient.username ?? ""
