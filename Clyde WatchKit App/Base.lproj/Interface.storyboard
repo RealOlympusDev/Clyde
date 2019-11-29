@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14868" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jaC-U0-ySR">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15505" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jaC-U0-ySR">
     <device id="watch44"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14643"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
         <!--Clyde-->
@@ -269,8 +269,8 @@
                     </items>
                     <connections>
                         <outlet property="ai" destination="mTQ-7l-U14" id="7R0-Jy-ojc"/>
-                        <outlet property="group" destination="9TQ-cV-QBD" id="l8V-9l-vQl"/>
-                        <outlet property="message" destination="SUC-gi-Rzq" id="ahZ-MO-i1J"/>
+                        <outlet property="group" destination="9TQ-cV-QBD" id="mo4-gi-hzf"/>
+                        <outlet property="message" destination="SUC-gi-Rzq" id="JZ8-gs-4oy"/>
                         <outlet property="table" destination="xZX-s8-5ND" id="jhA-ef-wfR"/>
                     </connections>
                 </controller>
@@ -386,13 +386,20 @@
             </objects>
             <point key="canvasLocation" x="53" y="643"/>
         </scene>
+        <!--FlickType-->
+        <scene sceneID="QBC-HS-peN">
+            <objects>
+                <controllerPlaceholder referencedIdentifier="FlickType" id="kUA-7j-IU5"/>
+            </objects>
+            <point key="canvasLocation" x="-477" y="830"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Icon-24" width="24" height="24"/>
         <image name="ai" width="16" height="16"/>
         <image name="envelope.fill" catalog="system" width="64" height="46"/>
         <image name="falcon-eyes-background-cloth-bcp-03-2-9x5-m-grey-washablef-medium-2967203-29536-162" width="150" height="150"/>
-        <image name="gear" catalog="system" width="64" height="60"/>
+        <image name="gear" catalog="system" width="64" height="58"/>
         <image name="square.stack.3d.down.right.fill" catalog="system" width="62" height="64"/>
     </resources>
 </document>

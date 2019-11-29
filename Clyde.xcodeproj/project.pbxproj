@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,11 @@
 		A413DA7122C72261002F4DD5 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A413DA7022C72261002F4DD5 /* ExtensionDelegate.swift */; };
 		A413DA7522C72264002F4DD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A413DA7422C72264002F4DD5 /* Assets.xcassets */; };
 		A4214E18233D6E5B005DB65C /* ClydeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4214E17233D6E5B005DB65C /* ClydeController.swift */; };
+		A43A56BA2390A18600160D0E /* DataCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43A56B92390A18600160D0E /* DataCompression.swift */; };
+		A43A56BC2390AABE00160D0E /* FlickTypeKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A43A56BB2390AABD00160D0E /* FlickTypeKit.xcframework */; };
+		A43A56BD2390AABE00160D0E /* FlickTypeKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A43A56BB2390AABD00160D0E /* FlickTypeKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		A43A56C02390AB0F00160D0E /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = A43A56BE2390AB0F00160D0E /* keyboard.png */; };
+		A43A56C12390AB0F00160D0E /* FlickType.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A43A56BF2390AB0F00160D0E /* FlickType.storyboard */; };
 		A44593F6231A3A6D00F50754 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44593F5231A3A6D00F50754 /* Socket.swift */; };
 		A44593F8231A3B1300F50754 /* Ready.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44593F7231A3B1300F50754 /* Ready.swift */; };
 		A46A29E123908324005A50C1 /* WebSocketConnection-URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46A29E023908324005A50C1 /* WebSocketConnection-URLSession.swift */; };
@@ -102,6 +107,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A43A56BD2390AABE00160D0E /* FlickTypeKit.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,6 +126,10 @@
 		A413DA7422C72264002F4DD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A413DA7622C72264002F4DD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4214E17233D6E5B005DB65C /* ClydeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClydeController.swift; sourceTree = "<group>"; };
+		A43A56B92390A18600160D0E /* DataCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataCompression.swift; path = "../../../../Downloads/DataCompression-master/Sources/DataCompression/DataCompression.swift"; sourceTree = "<group>"; };
+		A43A56BB2390AABD00160D0E /* FlickTypeKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FlickTypeKit.xcframework; path = FlickTypeKit/FlickTypeKit.xcframework; sourceTree = "<group>"; };
+		A43A56BE2390AB0F00160D0E /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keyboard.png; path = "FlickTypeKit/App Resources/keyboard.png"; sourceTree = "<group>"; };
+		A43A56BF2390AB0F00160D0E /* FlickType.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FlickType.storyboard; path = "FlickTypeKit/App Resources/FlickType.storyboard"; sourceTree = "<group>"; };
 		A44593F5231A3A6D00F50754 /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		A44593F7231A3B1300F50754 /* Ready.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ready.swift; sourceTree = "<group>"; };
 		A46A29E023908324005A50C1 /* WebSocketConnection-URLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "WebSocketConnection-URLSession.swift"; path = "../../../../Downloads/URLSessionWebSocketTask-master/WebSockets/WebSocketConnection-URLSession.swift"; sourceTree = "<group>"; };
@@ -168,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A43A56BC2390AABE00160D0E /* FlickTypeKit.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +188,8 @@
 		A413DA4F22C7225D002F4DD5 = {
 			isa = PBXGroup;
 			children = (
+				A43A56BF2390AB0F00160D0E /* FlickType.storyboard */,
+				A43A56BE2390AB0F00160D0E /* keyboard.png */,
 				A48D03FA22D4780D008F9520 /* API */,
 				A413DA5E22C7225D002F4DD5 /* Clyde WatchKit App */,
 				A413DA6D22C72261002F4DD5 /* Clyde WatchKit Extension */,
@@ -219,6 +232,7 @@
 		A421D4C322CB07D300155886 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A43A56BB2390AABD00160D0E /* FlickTypeKit.xcframework */,
 				A4B5653A233629E1009CF2BA /* FlickTypeKit.framework */,
 				A4FF2FC8233622D300EFFDA3 /* FlickTypeKit.framework */,
 			);
@@ -306,6 +320,7 @@
 		A4F8310D2318B2B600D97EB9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				A43A56B92390A18600160D0E /* DataCompression.swift */,
 				A413DA7022C72261002F4DD5 /* ExtensionDelegate.swift */,
 				A4CC3C5723236AE800F30F3A /* WebSocketConnection.swift */,
 				A46A29E023908324005A50C1 /* WebSocketConnection-URLSession.swift */,
@@ -548,6 +563,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A43A56C02390AB0F00160D0E /* keyboard.png in Resources */,
+				A43A56C12390AB0F00160D0E /* FlickType.storyboard in Resources */,
 				A413DA6322C72261002F4DD5 /* Assets.xcassets in Resources */,
 				A413DA6122C7225D002F4DD5 /* Interface.storyboard in Resources */,
 			);
@@ -570,6 +587,7 @@
 			files = (
 				A4F9485022D4790D004D7A08 /* ChannelRowController.swift in Sources */,
 				A4F9487C22D479C4004D7A08 /* UIFont+Traits.swift in Sources */,
+				A43A56BA2390A18600160D0E /* DataCompression.swift in Sources */,
 				A4F9486C22D479B7004D7A08 /* MarkdownStyle.swift in Sources */,
 				A4F9489422D47A1C004D7A08 /* MarkdownUnescaping.swift in Sources */,
 				A4F9489A22D47A1C004D7A08 /* MarkdownList.swift in Sources */,

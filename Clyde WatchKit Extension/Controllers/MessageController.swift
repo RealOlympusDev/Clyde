@@ -7,11 +7,9 @@
 //
 
 import WatchKit
+import FlickTypeKit
 
 class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
-    func onMessage(connection: WebSocketConnection, text: String) {
-        
-    }
     
     
     func onConnected(connection: WebSocketConnection) {
@@ -505,33 +503,13 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
         
         websocket.delegate = self
         
-//        let json: [String : Any] = [
-//            "op": 2,
-//            "d": [
-//                "token": Discord.token ?? "",
-//                "properties": [
-//                    "os": "Linux",
-//                    "browser": "Firefox",
-//                    "device": "",
-//                    "referrer": "",
-//                    "referring_domain": ""
-//                ],
-//                "large_threshold": 100,
-//                "compress": true
-//            ]
-//        ]
-//
-//         guard let data = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) else { return }
-//
-//        websocket.send(data: data)
-        
                 
     }
     
     
     @IBAction func send_message() {
         
-      self.presentTextInputController(withSuggestions:nil, allowedInputMode: .allowEmoji, completion: { (results) in
+        self.presentTextInputController(withSuggestions:nil, allowedInputMode: .allowEmoji, flickTypeMode: .ask, completion: { (results) in
                       
         guard let responses = results else { return }
                       
@@ -551,6 +529,8 @@ class MessageController: WKInterfaceController, WebSocketConnectionDelegate {
             
             
             Discord.sendMessage(channel: channel, message: text ?? "", completion: { message in
+                
+                print(message)
                 
                 
             })
